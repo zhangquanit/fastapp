@@ -1,0 +1,242 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+def config = rootProject.ext
+android {
+
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+
+        applicationId config.app.applicationId
+        versionCode config.app.versionCode
+        versionName config.app.versionName
+
+
+        //矢量图
+        vectorDrawables.useSupportLibrary = true
+
+        manifestPlaceholders = [UMENG_CHANNEL_VALUE: "official"] // 默认渠道
+
+        ndk {
+            // 设置支持的 SO 库构架
+            abiFilters 'armeabi'//, 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64', 'mips', 'mips64'
+        }
+
+    }
+
+    //----------------------签名配置----------------------
+    signingConfigs {
+        debug {
+            //为了方便测试分享或第三方登录  使用正式签名
+            storeFile file('../buildsystem/keystore.jks')
+            storePassword 'snqu_123456_agent'
+            keyAlias 'key0'
+            keyPassword 'snqu_123456_agent'
+            v2SigningEnabled true
+        }
+        release {
+            storeFile file('../buildsystem/keystore.jks')
+            storePassword 'snqu_123456_agent'
+            keyAlias 'key0'
+            keyPassword 'snqu_123456_agent'
+            v2SigningEnabled false
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            manifestPlaceholders = [DEBUGABLE: true]
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+        release {
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [DEBUGABLE: false]
+            signingConfig signingConfigs.release
+        }
+    }
+
+    flavorDimensions "channel"
+    productFlavors {
+        //生产测试
+        "prod" {}
+
+        //应用商店
+//        "offical" {} //官方
+//        "xiaomi" {} //小米
+//        "vivo" {} //vivo商店
+//        "oppo" {} //oppo商店
+//        "huawei" {} //华为
+//        "yyb" {} //应用宝
+//        "p360" {} //360
+//        "ali" {} //阿里
+//        "baidu" {}//百度
+
+//        kuan {} //酷安
+//        anzhi {} //安智
+//        samsung {} //三星
+//        meizu {}//魅族
+//        sogou {}//搜狗
+//        liqu {}//历趣
+//        mumayi {}//木蚂蚁
+//        yingyognhui {}//应用汇
+//        jifeng {}//机锋
+//        mm {}//mm应用商店
+//        lenovo {}//联想
+    }
+    productFlavors.all {
+        flavor ->
+            //合作渠道
+            buildConfigField("String", "cooperChannels", '"xx"')
+
+            if (name == "prod") {
+                ndk {
+                    abiFilters "armeabi", 'x86'
+                }
+                buildConfigField "String", "API_HOST", '"https://api-t.xin1.cn/" ' //测试服务器
+                buildConfigField "String", "H5_HOST", '"https://m-xlt-t.xin1.cn/" '
+                buildConfigField "String", "LOG_HOST", '"https://report-t.xin1.cn/"'
+                manifestPlaceholders = [APP_NAME: "@string/app_name_test", DEV_ENV: true, UMENG_CHANNEL_VALUE: name]
+            } else {
+                ndk {
+                    abiFilters "armeabi"
+                }
+                buildConfigField "String", "API_HOST", '"https://api.xinletao.vip/" ' //线上服务器
+                buildConfigField "String", "H5_HOST", '"https://m.xinletao.vip/" '
+                buildConfigField "String", "LOG_HOST", '"https://report.xin1.cn/" '
+                flavor.manifestPlaceholders = [APP_NAME: "@string/app_name", DEV_ENV: false, UMENG_CHANNEL_VALUE: name]
+            }
+    }
+
+    applicationVariants.all { variant ->
+        if (variant.buildType.name == "release" && variant.flavorName != "prod") {
+            variant.getPackageApplicationProvider().get().outputDirectory = new File(project.rootDir.absolutePath + "/apk")
+            variant.getPackageApplicationProvider().get().outputScope.apkDatas.forEach { apkData ->
+
+                apkData.outputFileName = "xlt_" + variant.flavorName + ".apk"
+//                if (apkData.getFullName() == variant.flavorName + "UniversalRelease") {
+//                    variant.getPackageApplicationProvider().get().outputDirectory = new File(project.rootDir.absolutePath + "/apk")
+//                    apkData.outputFileName = variant.flavorName + ".apk"
+//                } else {
+//                    apkData.outputFileName = apkData.getFullName() + ".apk"
+//                }
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/proguard/androidx-annotations.pro'
+    }
+
+    lintOptions {
+        quiet true
+        abortOnError false
+        ignoreWarnings true
+        disable 'InvalidPackage'            //Some libraries have issues with this.
+        disable 'OldTargetApi'
+        //Lint gives this warning but SDK 20 would be Android L Beta.
+        disable 'IconDensities'             //For testing purpose. This is safe to remove.
+        disable 'IconMissingDensityFolder'  //For testing purpose. This is safe to remove.
+    }
+    useLibrary 'org.apache.http.legacy'
+    androidExtensions {
+        experimental = true
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar', '*.aar'], exclude: ['android-support*.jar'], dir: 'libs')
+    api project(':librarys:AppUpdate')
+    api project(':librarys:CommonUtil')
+    api project(':librarys:Logger')
+    api project(':librarys:CommonWidget')
+    api project(':librarys:umeng')
+
+    implementation config.kotlin
+    implementation config.kotlin_core
+    implementation config.appCompat
+    implementation config.supportV4
+    implementation config.recyclerView
+    implementation config.constraint //约束布局
+    implementation config.lifecycleExtensions //ViewModelProviders
+    implementation config.fragmentation  //页面容器
+    implementation config.rxPermissions  //rxpermission
+//    implementation config.rxBinding  //RxBinding组件 依赖Rxjava3 RxAndroid3
+
+    //数据
+    implementation config.retrofit2
+    implementation config.retrofit2AdapterRxjava
+    implementation config.retrofit2ConvertGson
+    implementation config.retrofit2Scalars
+    implementation config.okHttp
+    implementation config.loggingInterceptor
+    implementation config.rxJava
+    implementation config.rxAndroid
+    implementation config.gson
+
+    //图片加载
+    implementation config.glide
+    annotationProcessor config.glideCompiler
+    implementation(config.glideOkHttp) {
+        exclude group: "com.android.support"
+    }
+    implementation config.glideWebp //glide支持webp
+    implementation config.glideTransform //glide图片处理
+    implementation config.album //图片选择
+    implementation config.luban //图片压缩
+    implementation config.roundedImageView //圆角图片
+    implementation config.recycleViewAdapter //recycleView Adapter
+
+    //workmanager
+    implementation  config.workManager_kotlin
+
+    //注入
+    implementation config.butterKnife //UI
+    annotationProcessor config.butterKnifeCompiler
+    implementation config.eventBus //事件通知
+
+    //工具箱
+    implementation config.guava
+    implementation config.utilCode
+
+    //K-V
+    implementation config.MMKV
+
+    //UI控件
+    implementation config.smartRefresh  //下拉刷新
+    implementation config.smartRefreshHeader
+
+    //调试
+    debugImplementation config.debugDependencies.leakCanary
+    debugImplementation config.debugDependencies.blockCanary
+    releaseImplementation config.releaseDependencies.leakCanary
+    releaseImplementation config.releaseDependencies.blockCanary
+}

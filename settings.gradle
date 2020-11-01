@@ -1,0 +1,9 @@
+include ':ApkChannel'
+rootProject.name = 'fastapp'
+include ':app',
+        ':librarys:ApkChannel',
+        ':librarys:Logger',
+        ':librarys:CommonUtil',
+        ':librarys:AppUpdate',
+        ':librarys:CommonWidget',
+        ':librarys:umeng'

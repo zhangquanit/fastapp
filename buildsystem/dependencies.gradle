@@ -1,0 +1,147 @@
+ext {
+
+    //################################# 版本号 #################################
+    app = [
+            versionCode  : 10000,
+            versionName  : '1.0.0',
+            applicationId: 'com.fastapp'
+    ]
+
+    //Android
+    buildToolsVersion = "30.0.2"
+    minSdkVersion = 21
+    targetSdkVersion = 28
+    compileSdkVersion = 30
+
+    javaVersion = JavaVersion.VERSION_1_8
+
+    //Libraries
+    supportVersion = '1.0.0'
+    retrofit2Version = '2.9.0'
+    okHttpVersion = '4.7.2'
+    glideVersion = '4.11.0'
+    roomVersion = '2.2.5'
+    autoDisposeVersion = '2.0.0'
+    work_version = '2.4.0'
+    //调试
+    leakCanaryVersion = '1.6.3'
+    blockCanaryVersion = '1.5.0'
+
+    //################################# 依赖库 #################################
+    //kotlin
+    kotlin = "org.jetbrains.kotlin:kotlin-stdlib:1.3.72"
+    kotlin_core = "androidx.core:core-ktx:1.3.2"
+    kotlin_coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1"
+    //Android Support
+    supportV4 = "androidx.legacy:legacy-support-v4:${supportVersion}"
+    appCompat = "androidx.appcompat:appcompat:1.2.0"
+    materialDesign = "com.google.android.material:material:${supportVersion}"
+    recyclerView = "androidx.recyclerview:recyclerview:${supportVersion}"
+    percentlayout = "androidx.percentlayout:percentlayout:${supportVersion}"
+
+    constraint = "androidx.constraintlayout:constraintlayout:2.0.2"
+    lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:2.0.0" //ViewModelProviders
+    multidex = 'androidx.multidex:multidex:2.0.1'
+
+    //Rx系列
+    rxJava = "io.reactivex.rxjava2:rxjava:2.2.6"
+    rxAndroid = "io.reactivex.rxjava2:rxandroid:2.1.1"
+    rxPermissions = "com.github.tbruyelle:rxpermissions:0.10.2"
+    rxBinding = "com.jakewharton.rxbinding4:rxbinding:4.0.0"
+
+    //DI系列
+    butterKnife = "com.jakewharton:butterknife:10.2.1"
+    butterKnifeCompiler = "com.jakewharton:butterknife-compiler:10.2.1"
+
+    //网络依赖库
+    retrofit2 = "com.squareup.retrofit2:retrofit:${retrofit2Version}"
+    retrofit2AdapterRxjava = "com.squareup.retrofit2:adapter-rxjava2:${retrofit2Version}"
+    retrofit2ConvertGson = "com.squareup.retrofit2:converter-gson:${retrofit2Version}"
+    retrofit2Scalars = "com.squareup.retrofit2:converter-scalars:2.0.0"
+    okHttp = "com.squareup.okhttp3:okhttp:${okHttpVersion}"
+    loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}"
+    gson = "com.google.code.gson:gson:2.8.6"
+
+    //事件通知
+    eventBus = "org.greenrobot:eventbus:3.2.0"
+    //google工具类聚合
+    guava = "com.google.guava:guava:29.0-android"
+    //Android工具库
+    utilCode = 'com.blankj:utilcodex:1.29.0'
+    //第三方RecycleView adapter
+    recycleViewAdapter = "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4"
+    //Fragment容器
+    fragmentation = "me.yokeyword:fragmentationx:1.0.2"
+
+    //下拉刷新
+    smartRefresh = 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-x'
+    smartRefreshHeader = 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-x' //没有使用特殊Header，可以不加这行
+
+    //Glide图片加载
+    glide = "com.github.bumptech.glide:glide:${glideVersion}"
+    glideCompiler = "com.github.bumptech.glide:compiler:${glideVersion}"
+    glideOkHttp = "com.github.bumptech.glide:okhttp3-integration:${glideVersion}" //使用okhttp加载图片
+    glideWebp = "com.zlc.glide:webpdecoder:1.7.${glideVersion}"
+    glideTransform = "jp.wasabeef:glide-transformations:4.0.0" //图片处理(圆角、颜色、Blur、Mask)
+
+    //拍照和选择照片  https://github.com/yanzhenjie/Album
+    album = 'com.yanzhenjie:album:2.1.3'
+    //图片压缩  https://github.com/Curzibn/Luban
+    luban = 'top.zibin:Luban:1.1.8'
+    //圆角图片  适合加载静态图片和非gif的网络图片  如果是网络圆角图片 建议使用Glide
+    roundedImageView = 'com.makeramen:roundedimageview:2.3.0'
+
+
+    //*************************** START *****************************
+    //AutoDispose
+    autoDispose = "com.uber.autodispose:autodispose:${autoDisposeVersion}"
+    audioDisposeLifecycle = "com.uber.autodispose:autodispose-lifecycle:${autoDisposeVersion}"
+    autoDisposeJdk = "com.uber.autodispose:autodispose-lifecycle-jdk8:${autoDisposeVersion}"
+    autoDisposeAndroid = "com.uber.autodispose:autodispose-android:${autoDisposeVersion}"
+    autoDisposeAndroidComponent = "com.uber.autodispose:autodispose-android-archcomponents:${autoDisposeVersion}"
+
+    //Room数据库
+    roomRuntime = "androidx.room:room-runtime:$roomVersion"
+    roomProcessor = "androidx.room:room-compiler:$roomVersion"
+    roomRxjava2 = "androidx.room:room-rxjava2:$roomVersion"
+    roomGuava = "androidx.room:room-guava:$roomVersion"
+    roomKotlin = "androidx.room:room-ktx:$roomVersion"
+
+    //WorkManager
+    // (Java only)
+    workManager = "androidx.work:work-runtime:$work_version"
+    //Kotlin + coroutines
+    workManager_kotlin = "androidx.work:work-runtime-ktx:$work_version"
+    // optional - RxJava2 support
+    workManager_rxjava2 = "androidx.work:work-rxjava2:$work_version"
+
+    //微信K-V组件
+    MMKV = "com.tencent:mmkv-static:1.2.2"
+
+
+    //获取时间防止修改手机时间
+    truetime = 'com.github.instacart.truetime-android:library-extension-rx:3.4'
+    //时间或条件选择控件  https://github.com/Bigkoo/Android-PickerView
+    pickerView = "com.contrarywind:Android-PickerView:4.1.9"
+    //二维码扫描zxing
+    zxing = 'cn.bingoogolapple:bga-qrcode-zxing:1.3.7'
+    //标签流式布局
+    flowlayout = "com.hyman:flowlayout-lib:1.1.2"
+    //apk防护
+    easyProtector = "com.lahm.library:easy-protector-release:1.1.1"
+
+    //*************************** END *****************************
+
+
+    //################################# 开发调试 #################################
+    //https://github.com/markzhai/AndroidPerformanceMonitor
+    //https://github.com/square/leakcanary
+    debugDependencies = [
+            leakCanary : "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
+            blockCanary: "com.github.markzhai:blockcanary-android:${blockCanaryVersion}"
+    ]
+    releaseDependencies = [
+            leakCanary : "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}",
+            blockCanary: "com.github.markzhai:blockcanary-no-op:${blockCanaryVersion}"
+    ]
+}

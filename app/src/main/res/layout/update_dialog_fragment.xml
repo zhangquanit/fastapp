@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80000000"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:paddingBottom="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/update_bg"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="25dp"
+            android:text="发现新版本"
+            android:textColor="#ffffff"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="#ffffff"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            tools:text="V1.10" />
+
+        <TextView
+            android:id="@+id/tv_title_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="8dp"
+            android:text="新版本升级"
+            android:textColor="#ff000000"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_version" />
+
+        <View
+            android:id="@+id/view_line"
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="16dp"
+            android:background="#EBEBED"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_other" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nest_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:maxHeight="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_line">
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="70dp"
+                android:layout_marginEnd="70dp"
+                android:lineSpacingMultiplier="1.2"
+                android:maxHeight="100dp"
+                android:textColor="#8A8A8B"
+                android:textSize="15sp"
+                tools:text="1、新增加服务单新建功能。
+2、客户端体验优惠。
+2、客户端体验优惠。
+2、客户端体验优惠。
+2、客户端体验优惠。
+2、客户端体验优惠。
+2、客户端体验优惠。
+3、界面优化体验。" />
+        </androidx.core.widget.NestedScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nest_scroll_view">
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/update_cancel_bg"
+                android:gravity="center"
+                android:text="残忍拒绝"
+                android:textColor="#25282D"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_ensure"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/update_ensure_bg"
+                android:gravity="center"
+                android:text="立即更新"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+        <!--<TextView-->
+        <!--android:id="@+id/tv_cancel"-->
+        <!--android:layout_width="120dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:layout_marginBottom="30dp"-->
+        <!--android:background="@drawable/update_cancel_bg"-->
+        <!--android:gravity="center"-->
+        <!--android:levelText="残忍拒绝"-->
+        <!--android:textColor="#1B1B1B"-->
+        <!--android:textSize="16sp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/tv_ensure"-->
+        <!--app:layout_constraintHorizontal_bias="0.5"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/nest_scroll_view"-->
+        <!--tools:layout_editor_absoluteY="5dp" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/tv_ensure"-->
+        <!--android:layout_width="120dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:background="@drawable/update_ensure_bg"-->
+        <!--android:gravity="center"-->
+        <!--android:levelText="立即升级"-->
+        <!--android:textColor="#1B1B1B"-->
+        <!--android:textSize="16sp"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/tv_cancel"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.5"-->
+        <!--app:layout_constraintStart_toEndOf="@+id/tv_cancel"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/tv_cancel" />-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

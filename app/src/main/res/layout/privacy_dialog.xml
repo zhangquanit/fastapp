@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80000000">
+
+    <LinearLayout
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:background="@drawable/dialog_bg"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="28dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="星乐桃政策协议"
+            android:textColor="#ff000000"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请仔细查看星乐桃用户协议、隐私政策及平台推广规则\n进入APP即代表您已同意"
+            android:gravity="center"
+            android:textColor="#80000000"
+            android:textSize="13sp"
+            />
+
+        <TextView
+            android:layout_marginBottom="26dp"
+            android:layout_marginTop="24dp"
+            android:id="@+id/tv_know"
+            android:layout_width="120dp"
+            android:gravity="center"
+            android:layout_height="40dp"
+            android:text="我已阅读"
+            android:textColor="#ffffffff"
+            android:textSize="13sp"
+            android:background="@color/colorPrimary"
+            />
+    </LinearLayout>
+</FrameLayout>

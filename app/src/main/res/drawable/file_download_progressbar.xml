@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--设置ProgressBar背景色-->
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <solid android:color="#f8f6f9" />
+            <corners android:radius="4dp" />
+        </shape>
+    </item>
+
+    <!--设置ProgressBar进度条颜色-->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape>
+                <gradient
+                    android:endColor="#ffffae01"
+                    android:startColor="#ffff6e02" />
+                <corners android:radius="4dp" />
+            </shape>
+        </clip>
+        <!--        <scale-->
+        <!--            android:drawable="@drawable/community_progressbar_act"-->
+        <!--            android:scaleWidth="100%" />-->
+    </item>
+</layer-list>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/guide_img"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_go_login"
+        android:layout_width="130dp"
+        android:layout_height="35dp"
+        android:enabled="true"
+        android:gravity="center"
+        android:text="立即体验"
+        android:layout_marginBottom="90dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FF8202"
+        android:textSize="15sp" />
+
+
+</RelativeLayout>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:background="@drawable/dialog_bg">
+
+    <!--
+         <RelativeLayout
+        android:id="@+id/dialog_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        android:paddingBottom="20dp" >
+    -->
+
+    <LinearLayout
+        android:id="@+id/dialog_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="29dp"
+            android:gravity="center"
+            android:textColor="#131413"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dialog_content_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_titlebar"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingTop="18dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="18dp">
+
+        <TextView
+            android:id="@+id/dialog_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:lineSpacingExtra="10dp"
+            android:textColor="#848487"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/dialog_content2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textColor="#8A8A8B"
+            android:textSize="15sp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/dialog_line_h"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/dialog_content_bar"
+        android:background="@color/divider_color"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/dialog_line_h"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/btn_left"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/ripple_round_white_bg"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="#131413"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/divider_color" />
+
+        <TextView
+            android:id="@+id/btn_right"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/ripple_round_white_bg"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="#FF8202"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/btn_single"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/dialog_line_h"
+        android:background="@drawable/ripple_round_white_bg"
+        android:gravity="center"
+        android:text="确定"
+        android:textColor="#FF8202"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+    <!-- </RelativeLayout> -->
+
+</RelativeLayout>

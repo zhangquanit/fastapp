@@ -1,0 +1,18 @@
+<resources>
+
+    <string name="umeng_appkey">5dd34d390cafb2c61e0000ef</string>
+
+    <!-- 微信-->
+    <string name="wx_appid">wxc86d77c4531c88df</string>
+    <string name="wx_appkey">bb2d64d23c6ec3e91167e6d2e36c1d4a</string>
+
+    <!-- QQ-->
+    <string name="qq_appid">101829224</string>
+    <string name="qq_scheme">tencent101829224</string>
+    <string name="qq_appkey">d5df92ccead186ef02df4f966ce3b133</string>
+
+    <!-- 微博-->
+    <string name="sina_appid">3126804965</string>
+    <string name="sina_appkey">e752636355a03b02fd0a9f084b8c8ff7</string>
+    <string name="sina_url">https://www-t.xin1.cn/download.html</string>
+</resources>

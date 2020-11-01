@@ -1,0 +1,48 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:excludeFromRecents">false</item>
+        <item name="android:noHistory">false</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@drawable/splash_icon</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:excludeFromRecents">false</item>
+        <item name="android:noHistory">false</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:clipToPadding">true</item>
+    </style>
+
+    <style name="MainTheme" parent="AppTheme">
+        <item name="android:windowBackground">@color/color_f5</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:excludeFromRecents">false</item>
+    </style>
+
+    <style name="fullScreen" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AnimBottom">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+    </style>
+
+    <style name="update_dialog_style" parent="@android:style/Theme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:background">@android:color/transparent</item>
+
+    </style>
+
+</resources>

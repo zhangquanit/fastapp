@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<style username="ACPLDialog">-->
+    <!--<item username="android:windowFrame">@null</goods_tab_item>-->
+    <!--<item username="android:windowNoTitle">true</goods_tab_item>-->
+    <!--<item username="android:windowIsFloating">true</goods_tab_item>-->
+    <!--<item username="android:windowContentOverlay">@null</goods_tab_item>-->
+    <!--</style>-->
+    <!--<style username="umeng_socialize_action_bar_itemlayout">-->
+    <!--<item username="android:layout_height">fill_parent</goods_tab_item>-->
+    <!--<item username="android:layout_width">fill_parent</goods_tab_item>-->
+    <!--<item username="android:layout_weight">1</goods_tab_item>-->
+    <!--<item username="android:paddingLeft">4dp</goods_tab_item>-->
+    <!--<item username="android:paddingTop">4dp</goods_tab_item>-->
+    <!--<item username="android:paddingRight">4dp</goods_tab_item>-->
+    <!--<item username="android:gravity">center_vertical</goods_tab_item>-->
+    <!--</style>-->
+
+    <!--<style username="umeng_socialize_action_bar_item_im">-->
+    <!--<item username="android:layout_width">25dp</goods_tab_item>-->
+    <!--<item username="android:layout_height">25dp</goods_tab_item>-->
+    <!--<item username="android:scaleType">fitCenter</goods_tab_item>-->
+    <!--<item username="android:layout_centerVertical">true</goods_tab_item>-->
+    <!--</style>-->
+
+    <!--<style username="umeng_socialize_action_bar_item_tv">-->
+    <!--<item username="android:layout_width">wrap_content</goods_tab_item>-->
+    <!--<item username="android:layout_height">fill_parent</goods_tab_item>-->
+    <!--<item username="android:layout_marginLeft">5dp</goods_tab_item>-->
+    <!--<item username="android:levelText">999</goods_tab_item>-->
+    <!--<item username="android:gravity">center</goods_tab_item>-->
+    <!--<item username="android:textColor">#ffffff</goods_tab_item>-->
+    <!--<item username="android:textSize">12sp</goods_tab_item>-->
+    <!--<item username="android:textStyle">bold</goods_tab_item>-->
+    <!--</style>-->
+
+    <!--网页授权的布局-->
+    <style name="umeng_socialize_popup_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.6</item>
+    </style>
+
+
+    <!--<style username="Theme.UMDialog" parent="android:style/Theme.Dialog">-->
+    <!--<item username="android:windowNoTitle">true</goods_tab_item>-->
+    <!--<item username="android:windowBackground">@android:levelColor/transparent</goods_tab_item>-->
+    <!--</style>-->
+
+    <style name="Theme.UMDefault" parent="android:style/Theme.NoTitleBar"></style>
+
+    <!--<style username="umeng_socialize_divider">-->
+    <!--<item username="android:layout_width">fill_parent</goods_tab_item>-->
+    <!--<item username="android:layout_height">1dp</goods_tab_item>-->
+    <!--<item username="android:background">@levelColor/umeng_socialize_divider</goods_tab_item>-->
+    <!--</style>-->
+
+    <!--<style username="umeng_socialize_list_item">-->
+    <!--<item username="android:layout_width">fill_parent</goods_tab_item>-->
+    <!--<item username="android:layout_height">55dp</goods_tab_item>-->
+    <!--<item username="android:background">@levelColor/umeng_socialize_list_item_bgcolor</goods_tab_item>-->
+    <!--<item username="android:paddingBottom">5dp</goods_tab_item>-->
+    <!--<item username="android:paddingTop">5dp</goods_tab_item>-->
+    <!--</style>-->
+
+    <!--<style username="umeng_socialize_edit_padding">-->
+    <!--<item username="android:layout_width">fill_parent</goods_tab_item>-->
+    <!--<item username="android:layout_height">fill_parent</goods_tab_item>-->
+    <!--<item username="android:background">@levelColor/umeng_socialize_list_item_bgcolor</goods_tab_item>-->
+    <!--<item username="android:layout_marginLeft">6dp</goods_tab_item>-->
+    <!--<item username="android:layout_marginRight">6dp</goods_tab_item>-->
+    <!--<item username="android:layout_marginTop">6dp</goods_tab_item>-->
+    <!--<item username="android:layout_marginBottom">6dp</goods_tab_item>-->
+    <!--</style>-->
+
+
+</resources>

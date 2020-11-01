@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">fastapp</string>
+    <string name="app_name_test">fastapp</string>
+    <string name="app_schema">xx://</string>
+
+    <string name="net_noconnection">网络异常，请稍后再试</string>
+    <string name="wx_appid">wxc86d77c4531c88df</string>
+
+</resources>

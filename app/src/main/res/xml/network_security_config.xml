@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!--Android P 限制了明文流量的网络请求，非加密的流量请求都会被系统禁止掉 或者http换成https -->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+
+    <domain-config>
+        <domain includeSubdomains="true">api-t.xinletao.vip</domain>
+        <domain includeSubdomains="true">api.xinletao.vip</domain>
+        <trust-anchors>
+            <certificates src="user" />//信任用户自己安装的证书
+        </trust-anchors>
+    </domain-config>
+</network-security-config>
