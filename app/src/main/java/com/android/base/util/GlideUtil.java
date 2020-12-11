@@ -14,10 +14,7 @@ import com.bumptech.glide.request.target.BaseTarget;
 import com.bumptech.glide.request.target.Target;
 
 /**
- * desc:
- * time: 2019/1/14
- *
- * @author 银进
+ * Glide工具类
  */
 public class GlideUtil {
 

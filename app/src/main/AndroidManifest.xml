@@ -75,11 +75,6 @@
             android:name="env"
             android:value="${DEV_ENV}" />
 
-        <!-- Glide 支持https-->
-        <meta-data
-            android:name="GlideModule"
-            android:value="com.android.base.util.OkHttpAppGlideModule" />
-
         <!-- 友盟 start -->
         <activity
             android:name=".wxapi.WXEntryActivity"
