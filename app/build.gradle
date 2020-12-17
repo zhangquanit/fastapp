@@ -24,11 +24,13 @@ android {
 
         ndk {
             // 设置支持的 SO 库构架
-            abiFilters 'armeabi-v7a'// 'armeabi','armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64', 'mips', 'mips64'
+            abiFilters 'armeabi-v7a'
+// 'armeabi','armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64', 'mips', 'mips64'
         }
 
         resConfigs "zh"
 
+        multiDexEnabled true
     }
 
     //----------------------签名配置----------------------
@@ -158,7 +160,7 @@ android {
         quiet true
         abortOnError false
         ignoreWarnings true
-        disable 'InvalidPackage','OldTargetApi', 'IconDensities', 'IconMissingDensityFolder'
+        disable 'InvalidPackage', 'OldTargetApi', 'IconDensities', 'IconMissingDensityFolder'
     }
 
     useLibrary 'org.apache.http.legacy'
@@ -177,6 +179,7 @@ dependencies {
     implementation config.appCompat
     implementation config.supportV4
     implementation config.recyclerView
+    implementation config.multidex
     implementation config.constraint //约束布局
     implementation config.lifecycleExtensions //ViewModelProviders
     implementation config.fragmentation  //页面容器
@@ -208,7 +211,7 @@ dependencies {
     implementation config.recycleViewAdapter //recycleView Adapter
 
     //workmanager
-    implementation  config.workManager_kotlin
+    implementation config.workManager_kotlin
 
     //注入
     implementation config.butterKnife //UI

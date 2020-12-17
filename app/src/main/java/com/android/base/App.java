@@ -9,12 +9,14 @@ import android.graphics.Color;
 import android.os.Looper;
 import android.widget.ImageView;
 
-import com.android.util.LContext;
+import androidx.multidex.MultiDex;
+
 import com.android.base.data.DataConfig;
 import com.android.base.util.GlideUtil;
 import com.android.base.util.KVUtil;
 import com.android.base.util.crash.AppCrashHandler;
 import com.android.base.version.AppVersionChecker;
+import com.android.util.LContext;
 import com.blankj.utilcode.util.ProcessUtils;
 import com.fastapp.BuildConfig;
 import com.fastapp.R;
@@ -80,6 +82,7 @@ public class App extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     private void init() {
