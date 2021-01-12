@@ -35,7 +35,6 @@ public class BaseAndroidViewModel extends AndroidViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
-        System.out.println("onCleared");
         if (compositeDisposable != null) {
             compositeDisposable.clear();
         }
