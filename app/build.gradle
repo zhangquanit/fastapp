@@ -31,6 +31,13 @@ android {
         resConfigs "zh"
 
         multiDexEnabled true
+
+        //arouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     //----------------------签名配置----------------------
@@ -165,8 +172,8 @@ android {
 
     useLibrary 'org.apache.http.legacy'
 
-    repositories{
-        flatDir{
+    repositories {
+        flatDir {
             dirs 'libs'
         }
     }
@@ -185,6 +192,7 @@ dependencies {
     implementation config.appCompat
     implementation config.supportV4
     implementation config.recyclerView
+    implementation config.cardView
     implementation config.multidex
     implementation config.constraint //约束布局
     implementation config.lifecycleExtensions //ViewModelProviders
@@ -223,6 +231,8 @@ dependencies {
     implementation config.butterKnife //UI
     annotationProcessor config.butterKnifeCompiler
     implementation config.eventBus //事件通知
+    implementation config.arouter
+    annotationProcessor config.arouterCompiler
 
     //工具箱
     implementation config.guava

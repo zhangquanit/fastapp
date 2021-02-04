@@ -3,7 +3,7 @@ ext {
     //################################# 版本号 #################################
     app = [
             versionCode  : 10000,
-            versionName  : '1.0.0',
+            versionName  : '1.0.0', //versionName: a.b.c -> versionCode = a*10000+b*100+c*1 如1.2.3->10203
             applicationId: 'com.fastapp'
     ]
 
@@ -38,6 +38,7 @@ ext {
     materialDesign = "com.google.android.material:material:${supportVersion}"
     recyclerView = "androidx.recyclerview:recyclerview:${supportVersion}"
     percentlayout = "androidx.percentlayout:percentlayout:${supportVersion}"
+    cardView = "androidx.cardview:cardview:1.0.0"
 
     constraint = "androidx.constraintlayout:constraintlayout:2.0.2"
     lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:2.0.0" //ViewModelProviders
@@ -52,6 +53,8 @@ ext {
     //DI系列
     butterKnife = "com.jakewharton:butterknife:10.2.1"
     butterKnifeCompiler = "com.jakewharton:butterknife-compiler:10.2.1"
+    arouter = "com.alibaba:arouter-api:1.5.1"
+    arouterCompiler = "com.alibaba:arouter-compiler:1.5.1"
 
     //网络依赖库
     retrofit2 = "com.squareup.retrofit2:retrofit:${retrofit2Version}"
