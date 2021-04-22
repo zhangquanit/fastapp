@@ -49,4 +49,18 @@
         app:contentPadding="5dp">
 
     </androidx.cardview.widget.CardView>
+
+    <com.fastapp.test.AlivcActionEditText
+        android:id="@+id/edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="118dp"
+        android:imeActionLabel="确定"
+        android:imeOptions="actionDone"
+        android:imeActionId="111"
+        android:hint="例如：你好"
+        android:singleLine="true"
+        android:textColor="#2A2A2A"
+        android:textColorHint="#9A9A9A"
+        android:textSize="15sp" />
+
 </LinearLayout>

@@ -8,9 +8,5 @@
         <files-path
             name="files_path"
             path="." />
-
-        <!--    <files-path
-                name="apk"
-                path="files/" />-->
     </paths>
 </resources>

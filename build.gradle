@@ -23,6 +23,37 @@ allprojects {
         jcenter()
         maven { url 'https://jitpack.io' }
     }
+
+    gradle.taskGraph.whenReady {
+        tasks.each { task ->
+
+        }
+    }
+}
+
+subprojects {
+    project.afterEvaluate {
+        project.plugins.withId('com.android.library') {
+            project.android.compileSdkVersion rootProject.ext.compileSdkVersion
+            project.android.buildToolsVersion rootProject.ext.buildToolsVersion
+            project.android.defaultConfig.minSdkVersion rootProject.ext.minSdkVersion
+            project.android.defaultConfig.targetSdkVersion rootProject.ext.targetSdkVersion
+        }
+
+    }
+
+    // 强制使用某个版本的库
+//    configurations.all {
+//        resolutionStrategy{
+//            force 'com.xx.network:retrofit:1.0.1'
+//        }
+//    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 task clean(type: Delete) {

@@ -96,12 +96,6 @@ ext {
 
 
     //*************************** START *****************************
-    //AutoDispose
-    autoDispose = "com.uber.autodispose:autodispose:${autoDisposeVersion}"
-    audioDisposeLifecycle = "com.uber.autodispose:autodispose-lifecycle:${autoDisposeVersion}"
-    autoDisposeJdk = "com.uber.autodispose:autodispose-lifecycle-jdk8:${autoDisposeVersion}"
-    autoDisposeAndroid = "com.uber.autodispose:autodispose-android:${autoDisposeVersion}"
-    autoDisposeAndroidComponent = "com.uber.autodispose:autodispose-android-archcomponents:${autoDisposeVersion}"
 
     //Room数据库
     roomRuntime = "androidx.room:room-runtime:$roomVersion"

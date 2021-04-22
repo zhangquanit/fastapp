@@ -24,8 +24,7 @@ android {
 
         ndk {
             // 设置支持的 SO 库构架
-            abiFilters 'armeabi-v7a'
-// 'armeabi','armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64', 'mips', 'mips64'
+            abiFilters 'armeabi-v7a'   //'x86'
         }
 
         resConfigs "zh"
@@ -38,6 +37,11 @@ android {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
+    }
+
+    aaptOptions {
+        cruncherEnabled = false  //禁止AS对png图片进行校验
+        useNewCruncher = false
     }
 
     //----------------------签名配置----------------------
@@ -116,7 +120,7 @@ android {
 
             if (name == "prod") {
                 ndk {
-                    abiFilters "armeabi", 'x86'
+                    abiFilters "armeabi-v7a", 'x86'
                 }
                 buildConfigField "String", "API_HOST", '"https://api-t.xin1.cn/" ' //测试服务器
                 buildConfigField "String", "H5_HOST", '"https://m-xlt-t.xin1.cn/" '
@@ -124,7 +128,7 @@ android {
                 manifestPlaceholders = [APP_NAME: "@string/app_name_test", DEV_ENV: true, UMENG_CHANNEL_VALUE: name]
             } else {
                 ndk {
-                    abiFilters "armeabi"
+                    abiFilters "armeabi-v7a"
                 }
                 buildConfigField "String", "API_HOST", '"https://api.xinletao.vip/" ' //线上服务器
                 buildConfigField "String", "H5_HOST", '"https://m.xinletao.vip/" '

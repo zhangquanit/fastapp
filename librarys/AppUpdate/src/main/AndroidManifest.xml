@@ -7,7 +7,7 @@
             android:exported="false" />
 
         <provider
-            android:name="component.update.UpateFileProvider"
+            android:name="component.update.AppUpdateFileProvider"
             android:authorities="${applicationId}.appupdate.provider"
             android:exported="false"
             android:grantUriPermissions="true">

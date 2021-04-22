@@ -8,11 +8,12 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.android.util.ext.ToastUtil;
 import com.android.base.Constant;
 import com.android.base.data.HttpResponseException;
 import com.android.base.data.NetReqResult;
@@ -24,6 +25,7 @@ import com.android.base.util.GlideUtil;
 import com.android.base.util.share.ShareDialog;
 import com.android.base.util.share.ShareInfo;
 import com.android.base.widget.AlertDialogView;
+import com.android.util.ext.ToastUtil;
 import com.blankj.utilcode.util.ClickUtils;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -34,6 +36,14 @@ import java.io.File;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import common.widget.dialog.EffectDialogBuilder;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class MainActivity extends BaseActivity {
@@ -57,7 +67,14 @@ public class MainActivity extends BaseActivity {
 
         dirTest();
         doTask();
+
+
+        EditText editText = findViewById(R.id.edit_text);
+        editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        editText.setSingleLine();  // 这句话也是必不可少的
+
     }
+
 
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
     public void onEvent(PushEvent event) {
@@ -75,13 +92,16 @@ public class MainActivity extends BaseActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+
+
     @OnClick({R.id.testFrag, R.id.showDialog, R.id.http, R.id.share})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.testFrag:
-                TestFrag.start(mContext);
+//                TestFrag.start(mContext);
 //                Intent intent = new Intent(this, ActivityTwo.class);
 //                startAct(intent);
+//                rxjavaTest();
                 break;
             case R.id.showDialog:
                 showDialog();
@@ -175,6 +195,33 @@ public class MainActivity extends BaseActivity {
 
     }
 
+    private void rxjavaTest() {
+        Disposable disposable = Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<String> emitter) throws Exception {
+                System.out.println("emitter=" + emitter);
+                System.out.println("thread=" + Thread.currentThread().getName());
+                emitter.onNext("hello world");
+                emitter.onComplete();
+
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        System.out.println("result=" + s);
+                        System.out.println("thread=" + Thread.currentThread().getName());
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+
+                    }
+                });
+        System.out.println("disposable=" + disposable);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -183,4 +230,6 @@ public class MainActivity extends BaseActivity {
     private void doTask() {
         BackgroundTask.execute(MyTask.class);
     }
+
+
 }
