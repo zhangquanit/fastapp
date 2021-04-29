@@ -15,7 +15,7 @@ import com.android.base.Constant;
 import java.io.File;
 
 /**
- * 系统分享
+ * 系统分享文件
  * eg：   IntentUtils.shareVideo(mContext, file, "分享视频");
  */
 public class SystemShareUtils {

@@ -68,15 +68,11 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        //微信MMKV
-        MMKV.initialize(this, MMKVLogLevel.LevelDebug);
-
+        MMKV.initialize(this, MMKVLogLevel.LevelDebug); //微信MMKV
         if (!ProcessUtils.isMainProcess()) {
             return;
         }
-
-        //只有主进程才进行相关配置初始化
-        init();
+        init();//只有主进程才进行相关配置初始化
     }
 
     @Override
@@ -103,38 +99,10 @@ public class App extends Application {
                 .setVersionChecker(new AppVersionChecker())
                 .build();
         AppDownloadClient.getInstance().init(configuration);
-        //
+        //其他初始化
         initOthers();
         //拦截异常
-        RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable throwable) throws Exception {
-                if (throwable instanceof CompositeException) { //打印异常
-                    CompositeException exception = (CompositeException) throwable;
-                    List<Throwable> exceptions = exception.getExceptions();
-                    for (Throwable item : exceptions) {
-                        item.printStackTrace();
-                    }
-                } else {
-                    throwable.printStackTrace();
-                }
-            }
-        });
-        AppCrashHandler.install(new AppCrashHandler.ExceptionHandler() {
-            @Override
-            public void handlerException(Thread thread, Throwable throwable) {
-                if (thread == Looper.getMainLooper().getThread()) { //主线程
-                    System.out.println("主线程");
-                } else { //子线程
-                    System.out.println("子线程");
-                    //如果有第三方需要处理exception
-//                    mainExceptionHandler.uncaughtException(thread,throwable);
-                }
-                throwable.printStackTrace();
-            }
-        });
-
-
+        handleExceptions();
     }
 
     /**
@@ -254,6 +222,37 @@ public class App extends Application {
                 .stackViewMode(Fragmentation.BUBBLE)
                 .debug(BuildConfig.DEBUG)
                 .install();
+    }
+
+    private void handleExceptions() {
+        //处理RxJava  没有设置onError回调  io.reactivex.exceptions.OnErrorNotImplementedException
+        RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                if (throwable instanceof CompositeException) { //打印异常
+                    CompositeException exception = (CompositeException) throwable;
+                    List<Throwable> exceptions = exception.getExceptions();
+                    for (Throwable item : exceptions) {
+                        item.printStackTrace();
+                    }
+                } else {
+                    throwable.printStackTrace();
+                }
+            }
+        });
+        AppCrashHandler.install(new AppCrashHandler.ExceptionHandler() {
+            @Override
+            public void handlerException(Thread thread, Throwable throwable) {
+                if (thread == Looper.getMainLooper().getThread()) { //主线程
+                    System.out.println("主线程");
+                } else { //子线程
+                    System.out.println("子线程");
+                    //如果有第三方需要处理exception
+//                    mainExceptionHandler.uncaughtException(thread,throwable);
+                }
+                throwable.printStackTrace();
+            }
+        });
     }
 
 

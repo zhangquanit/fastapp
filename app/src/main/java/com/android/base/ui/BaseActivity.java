@@ -142,8 +142,12 @@ public abstract class BaseActivity extends SupportActivity {
 
 
     public void closeLoadDialog() {
-        if (mLoadingDialog != null) {
-            mLoadingDialog.dismiss();
+        try {
+            if (mLoadingDialog != null) {
+                mLoadingDialog.dismiss();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -26,4 +26,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation config.supportV4
     implementation config.recyclerView
+    implementation config.constraint
 }

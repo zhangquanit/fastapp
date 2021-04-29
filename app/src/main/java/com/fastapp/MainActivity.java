@@ -3,6 +3,7 @@ package com.fastapp;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
@@ -10,6 +11,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -68,11 +70,6 @@ public class MainActivity extends BaseActivity {
         dirTest();
         doTask();
 
-
-        EditText editText = findViewById(R.id.edit_text);
-        editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        editText.setSingleLine();  // 这句话也是必不可少的
-
     }
 
 
@@ -93,7 +90,6 @@ public class MainActivity extends BaseActivity {
     }
 
 
-
     @OnClick({R.id.testFrag, R.id.showDialog, R.id.http, R.id.share})
     public void onClick(View v) {
         switch (v.getId()) {
@@ -101,7 +97,8 @@ public class MainActivity extends BaseActivity {
 //                TestFrag.start(mContext);
 //                Intent intent = new Intent(this, ActivityTwo.class);
 //                startAct(intent);
-//                rxjavaTest();
+
+
                 break;
             case R.id.showDialog:
                 showDialog();
