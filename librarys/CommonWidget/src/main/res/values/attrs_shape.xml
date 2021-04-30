@@ -3,7 +3,12 @@
     <declare-styleable name="ShapeLayout">
 
         <!-- shape标签属性 -->
-        <attr name="sp_shape" format="integer" />
+        <attr name="sp_shape" format="enum">
+            <enum name="rectangle" value="0" />
+            <enum name="oval" value="1" />
+            <enum name="line" value="2" />
+            <enum name="ring" value="3" />
+        </attr>
         <attr name="sp_dither" format="boolean" />
         <attr name="sp_innerRadius" format="dimension|reference" />
         <attr name="sp_innerRadiusRatio" format="float" />
@@ -51,7 +56,11 @@
         <attr name="sp_gradientEndColor" format="reference|color" />
         <attr name="sp_gradientCenterX" format="float|fraction" />
         <attr name="sp_gradientCenterY" format="float|fraction" />
-        <attr name="sp_gradientType" format="integer" />
+        <attr name="sp_gradientType" format="enum">
+            <enum name="linear" value="0" />
+            <enum name="radial" value="1" />
+            <enum name="sweep" value="2" />
+        </attr>
         <attr name="sp_gradientRadius" format="reference|dimension|float" />
         <attr name="sp_gradientUseLevel" format="boolean" />
 
