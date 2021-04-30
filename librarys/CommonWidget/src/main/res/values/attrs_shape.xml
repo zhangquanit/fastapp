@@ -3,57 +3,57 @@
     <declare-styleable name="ShapeLayout">
 
         <!-- shape标签属性 -->
-        <attr name="shape" format="integer" />
-        <attr name="dither" format="boolean" />
-        <attr name="innerRadius" format="dimension|reference" />
-        <attr name="mInnerRadiusRatio" format="float" />
-        <attr name="thickness" format="dimension|reference" />
-        <attr name="thicknessRatio" format="float" />
-        <attr name="useLevel" format="boolean" />
-<!--    <attr name="tintMode" format="integer" />
-        <attr name="tint" format="color|reference" />
-        <attr name="opticalInsetLeft" format="dimension|reference" />
+        <attr name="sp_shape" format="integer" />
+        <attr name="sp_dither" format="boolean" />
+        <attr name="sp_innerRadius" format="dimension|reference" />
+        <attr name="sp_innerRadiusRatio" format="float" />
+        <attr name="sp_thickness" format="dimension|reference" />
+        <attr name="sp_thicknessRatio" format="float" />
+        <attr name="sp_useLevel" format="boolean" />
+        <attr name="sp_tintMode" format="integer" />
+        <attr name="sp_tint" format="color|reference" />
+        <!-- <attr name="opticalInsetLeft" format="dimension|reference" />
          <attr name="opticalInsetTop" format="dimension|reference" />
          <attr name="opticalInsetRight" format="dimension|reference" />
          <attr name="opticalInsetBottom" format="dimension|reference" />-->
 
         <!--宽高 -->
-        <attr name="width" format="dimension|reference" />
-        <attr name="height" format="dimension|reference" />
+        <attr name="sp_width" format="dimension|reference" />
+        <attr name="sp_height" format="dimension|reference" />
 
         <!-- 圆角半径 -->
-        <attr name="radius" format="dimension" />
-        <attr name="topLeftRadius" format="dimension|reference" />
-        <attr name="topRightRadius" format="dimension|reference" />
-        <attr name="bottomLeftRadius" format="dimension|reference" />
-        <attr name="bottomRightRadius" format="dimension|reference" />
+        <attr name="sp_radius" format="dimension" />
+        <attr name="sp_topLeftRadius" format="dimension|reference" />
+        <attr name="sp_topRightRadius" format="dimension|reference" />
+        <attr name="sp_bottomLeftRadius" format="dimension|reference" />
+        <attr name="sp_bottomRightRadius" format="dimension|reference" />
 
         <!-- 背景颜色 -->
-        <attr name="solid" format="reference|color" />
+        <attr name="sp_solid" format="reference|color" />
 
         <!--边框 -->
-        <attr name="strokeWidth" format="reference|dimension" />
-        <attr name="strokeColor" format="reference|color" />
-        <attr name="strokeDashWidth" format="reference|dimension" />
-        <attr name="strokeDashGap" format="reference|dimension" />
+        <attr name="sp_strokeWidth" format="reference|dimension" />
+        <attr name="sp_strokeColor" format="reference|color" />
+        <attr name="sp_strokeDashWidth" format="reference|dimension" />
+        <attr name="sp_strokeDashGap" format="reference|dimension" />
 
         <!-- padding -->
-        <attr name="padding" format="reference|dimension" />
-        <attr name="paddingLeft" format="reference|dimension" />
-        <attr name="paddingRight" format="reference|dimension" />
-        <attr name="paddingTop" format="reference|dimension" />
-        <attr name="paddingBottom" format="reference|dimension" />
+        <attr name="sp_padding" format="reference|dimension" />
+        <attr name="sp_paddingLeft" format="reference|dimension" />
+        <attr name="sp_paddingRight" format="reference|dimension" />
+        <attr name="sp_paddingTop" format="reference|dimension" />
+        <attr name="sp_paddingBottom" format="reference|dimension" />
 
         <!-- gradient-->
-        <attr name="gradientAngle" format="float" />
-        <attr name="gradientStartColor" format="reference|color" />
-        <attr name="gradientCenterColor" format="reference|color" />
-        <attr name="gradientEndColor" format="reference|color" />
-        <attr name="gradientCenterX" format="float|fraction" />
-        <attr name="gradientCenterY" format="float|fraction" />
-        <attr name="gradientType" format="integer" />
-        <attr name="gradientRadius" format="reference|dimension|float" />
-        <attr name="gradientUseLevel" format="boolean" />
+        <attr name="sp_gradientAngle" format="float" />
+        <attr name="sp_gradientStartColor" format="reference|color" />
+        <attr name="sp_gradientCenterColor" format="reference|color" />
+        <attr name="sp_gradientEndColor" format="reference|color" />
+        <attr name="sp_gradientCenterX" format="float|fraction" />
+        <attr name="sp_gradientCenterY" format="float|fraction" />
+        <attr name="sp_gradientType" format="integer" />
+        <attr name="sp_gradientRadius" format="reference|dimension|float" />
+        <attr name="sp_gradientUseLevel" format="boolean" />
 
     </declare-styleable>
 </resources>

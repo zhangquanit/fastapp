@@ -9,7 +9,10 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 
+import androidx.annotation.RequiresApi;
+
 import common.widget.R;
+
 
 /**
  * @author zhangquan
@@ -30,11 +33,14 @@ public class ShapeHelper {
         GradientDrawable gradientDrawable = new GradientDrawable();
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ShapeLayout);
 
-        updateStateFromTypedArray(typedArray, gradientDrawable);
+
         updateGradientDrawableSize(typedArray, gradientDrawable);
         updateGradientDrawableGradient(context, typedArray, gradientDrawable);
-        updateGradientDrawableSolid(typedArray, gradientDrawable);
-        updateGradientDrawableStroke(typedArray, gradientDrawable);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            updateStateFromTypedArray(typedArray, gradientDrawable);
+            updateGradientDrawableSolid(typedArray, gradientDrawable);
+            updateGradientDrawableStroke(typedArray, gradientDrawable);
+        }
         updateDrawableCorners(typedArray, gradientDrawable);
         updateGradientDrawablePadding(typedArray, gradientDrawable);
 
@@ -58,47 +64,49 @@ public class ShapeHelper {
      * android:thicknessRatio="1.2"
      * >
      */
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private static void updateStateFromTypedArray(TypedArray a, GradientDrawable gradientDrawable) {
-        int shape = a.getInt(R.styleable.ShapeLayout_shape, GradientDrawable.RECTANGLE);
+        int shape = a.getInt(R.styleable.ShapeLayout_sp_shape, GradientDrawable.RECTANGLE);
         gradientDrawable.setShape(shape);
 
-        boolean dither = a.getBoolean(R.styleable.ShapeLayout_dither, false);
+        boolean dither = a.getBoolean(R.styleable.ShapeLayout_sp_dither, false);
         gradientDrawable.setDither(dither);
 
         if (shape == GradientDrawable.RING) {
             int mInnerRadius = a.getDimensionPixelSize(
-                    R.styleable.ShapeLayout_innerRadius, -1);
+                    R.styleable.ShapeLayout_sp_innerRadius, -1);
             gradientDrawable.setInnerRadius(mInnerRadius);
             if (mInnerRadius == -1) {
                 float mInnerRadiusRatio = a.getFloat(
-                        R.styleable.ShapeLayout_mInnerRadiusRatio, DEFAULT_INNER_RADIUS_RATIO);
+                        R.styleable.ShapeLayout_sp_innerRadiusRatio, DEFAULT_INNER_RADIUS_RATIO);
                 gradientDrawable.setInnerRadiusRatio(mInnerRadiusRatio);
             }
 
             int mThickness = a.getDimensionPixelSize(
-                    R.styleable.ShapeLayout_thickness, -1);
+                    R.styleable.ShapeLayout_sp_thickness, -1);
             gradientDrawable.setThickness(mThickness);
             if (mThickness == -1) {
                 float mThicknessRatio = a.getFloat(
-                        R.styleable.ShapeLayout_thicknessRatio, DEFAULT_THICKNESS_RATIO);
+                        R.styleable.ShapeLayout_sp_thicknessRatio, DEFAULT_THICKNESS_RATIO);
                 gradientDrawable.setThicknessRatio(mThicknessRatio);
             }
 
             boolean mUseLevelForShape = a.getBoolean(
-                    R.styleable.ShapeLayout_useLevel, true);
+                    R.styleable.ShapeLayout_sp_useLevel, true);
             gradientDrawable.setUseLevel(mUseLevelForShape);
         }
 
-//        final int tintMode = a.getInt(R.styleable.ShapeLayout_tintMode, -1);
-//        if (tintMode != -1) {
-//            BlendMode blendMode = parseBlendMode(tintMode, BlendMode.SRC_IN);
-//            gradientDrawable.setTintBlendMode(blendMode);
-//        }
-//
-//        final ColorStateList tint = a.getColorStateList(R.styleable.ShapeLayout_tint);
-//        if (tint != null) {
-//            gradientDrawable.setTintList(tint);
-//        }
+        final int tintMode = a.getInt(R.styleable.ShapeLayout_sp_tintMode, -1);
+        if (tintMode != -1) {
+            BlendMode blendMode = parseBlendMode(tintMode, BlendMode.SRC_IN);
+            gradientDrawable.setTintBlendMode(blendMode);
+        }
+
+        final ColorStateList tint = a.getColorStateList(R.styleable.ShapeLayout_sp_tint);
+        if (tint != null) {
+            gradientDrawable.setTintList(tint);
+        }
+
 //        Insets mOpticalInsets = Insets.NONE;
 //        final int insetLeft = a.getDimensionPixelSize(
 //                R.styleable.ShapeLayout_opticalInsetLeft, mOpticalInsets.left);
@@ -116,12 +124,12 @@ public class ShapeHelper {
      * <size android:width="" android:height=""/>
      */
     private static void updateGradientDrawableSize(TypedArray typedArray, GradientDrawable gradientDrawable) {
-        if (typedArray.hasValue(R.styleable.ShapeLayout_width)
-                || typedArray.hasValue(R.styleable.ShapeLayout_height)) {
+        if (typedArray.hasValue(R.styleable.ShapeLayout_sp_width)
+                || typedArray.hasValue(R.styleable.ShapeLayout_sp_height)) {
             int width = typedArray.getDimensionPixelSize(
-                    R.styleable.ShapeLayout_width, -1);
+                    R.styleable.ShapeLayout_sp_width, -1);
             int height = typedArray.getDimensionPixelSize(
-                    R.styleable.ShapeLayout_height, -1);
+                    R.styleable.ShapeLayout_sp_height, -1);
             gradientDrawable.setSize(width, height);
         }
     }
@@ -148,19 +156,19 @@ public class ShapeHelper {
         boolean mUseLevel = false;
         int gradientType = GradientDrawable.LINEAR_GRADIENT;
 
-        mUseLevel = typedArray.getBoolean(R.styleable.ShapeLayout_gradientUseLevel, mUseLevel);
+        mUseLevel = typedArray.getBoolean(R.styleable.ShapeLayout_sp_gradientUseLevel, mUseLevel);
         gradientDrawable.setUseLevel(mUseLevel);
 
-        gradientType = typedArray.getInt(R.styleable.ShapeLayout_gradientType, gradientType);
+        gradientType = typedArray.getInt(R.styleable.ShapeLayout_sp_gradientType, gradientType);
         gradientDrawable.setGradientType(gradientType);
 
-        mCenterX = getFloatOrFraction(typedArray, R.styleable.ShapeLayout_gradientCenterX, mCenterX);
-        mCenterY = getFloatOrFraction(typedArray, R.styleable.ShapeLayout_gradientCenterY, mCenterY);
+        mCenterX = getFloatOrFraction(typedArray, R.styleable.ShapeLayout_sp_gradientCenterX, mCenterX);
+        mCenterY = getFloatOrFraction(typedArray, R.styleable.ShapeLayout_sp_gradientCenterY, mCenterY);
 
-        int startColor = typedArray.getColor(R.styleable.ShapeLayout_gradientStartColor, 0);
-        int centerColor = typedArray.getColor(R.styleable.ShapeLayout_gradientCenterColor, 0);
-        boolean hasCenterColor = typedArray.hasValue(R.styleable.ShapeLayout_gradientCenterColor);
-        int endColor = typedArray.getColor(R.styleable.ShapeLayout_gradientEndColor, 0);
+        int startColor = typedArray.getColor(R.styleable.ShapeLayout_sp_gradientStartColor, 0);
+        int centerColor = typedArray.getColor(R.styleable.ShapeLayout_sp_gradientCenterColor, 0);
+        boolean hasCenterColor = typedArray.hasValue(R.styleable.ShapeLayout_sp_gradientCenterColor);
+        int endColor = typedArray.getColor(R.styleable.ShapeLayout_sp_gradientEndColor, 0);
         if (hasCenterColor) {
             int[] colors = new int[]{startColor, centerColor, endColor};
             float[] positions = new float[]{0.0f, mCenterX != 0.5f ? mCenterX : mCenterY, 1f};
@@ -171,7 +179,7 @@ public class ShapeHelper {
         }
 
         GradientDrawable.Orientation mOrientation = GradientDrawable.Orientation.TOP_BOTTOM;
-        int angle = (int) typedArray.getFloat(R.styleable.ShapeLayout_gradientAngle, 0);
+        int angle = (int) typedArray.getFloat(R.styleable.ShapeLayout_sp_gradientAngle, 0);
         angle = ((angle % 360) + 360) % 360;
         if (angle >= 0) {
             switch (angle) {
@@ -206,7 +214,7 @@ public class ShapeHelper {
         gradientDrawable.setOrientation(mOrientation);
 
 
-        final TypedValue tv = typedArray.peekValue(R.styleable.ShapeLayout_gradientRadius);
+        final TypedValue tv = typedArray.peekValue(R.styleable.ShapeLayout_sp_gradientRadius);
         if (tv != null) {
             if (tv.type == TypedValue.TYPE_FRACTION) {
                 mGradientRadius = tv.getFraction(1.0f, 1.0f);
@@ -234,9 +242,10 @@ public class ShapeHelper {
     /**
      * <solid android:color="" />
      */
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private static void updateGradientDrawableSolid(TypedArray typedArray, GradientDrawable gradientDrawable) {
         final ColorStateList solidColor = typedArray.getColorStateList(
-                R.styleable.ShapeLayout_solid);
+                R.styleable.ShapeLayout_sp_solid);
         if (solidColor != null) {
             gradientDrawable.setColor(solidColor);
         }
@@ -250,14 +259,15 @@ public class ShapeHelper {
      * android:dashWidth=""
      * android:dashGap="" />
      */
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private static void updateGradientDrawableStroke(TypedArray typedArray, GradientDrawable gradientDrawable) {
 
-        int strokeWidth = typedArray.getDimensionPixelSize(R.styleable.ShapeLayout_strokeWidth, 0);
-        float dashWidth = typedArray.getDimension(R.styleable.ShapeLayout_strokeDashWidth, 0);
+        int strokeWidth = typedArray.getDimensionPixelSize(R.styleable.ShapeLayout_sp_strokeWidth, 0);
+        float dashWidth = typedArray.getDimension(R.styleable.ShapeLayout_sp_strokeDashWidth, 0);
         ColorStateList strokeColor = typedArray.getColorStateList(
-                R.styleable.ShapeLayout_strokeColor);
+                R.styleable.ShapeLayout_sp_strokeColor);
         if (dashWidth != 0.0f) {
-            float dashGap = typedArray.getDimension(R.styleable.ShapeLayout_strokeDashGap, 0);
+            float dashGap = typedArray.getDimension(R.styleable.ShapeLayout_sp_strokeDashGap, 0);
             gradientDrawable.setStroke(strokeWidth, strokeColor, dashWidth, dashGap);
         } else {
             gradientDrawable.setStroke(strokeWidth, strokeColor);
@@ -274,15 +284,15 @@ public class ShapeHelper {
      */
     private static void updateDrawableCorners(TypedArray typedArray, GradientDrawable gradientDrawable) {
 
-        int radius = typedArray.getDimensionPixelSize(R.styleable.ShapeLayout_radius, 0);
+        int radius = typedArray.getDimensionPixelSize(R.styleable.ShapeLayout_sp_radius, 0);
         final int topLeftRadius = typedArray.getDimensionPixelSize(
-                R.styleable.ShapeLayout_topLeftRadius, radius);
+                R.styleable.ShapeLayout_sp_topLeftRadius, radius);
         final int topRightRadius = typedArray.getDimensionPixelSize(
-                R.styleable.ShapeLayout_topRightRadius, radius);
+                R.styleable.ShapeLayout_sp_topRightRadius, radius);
         final int bottomLeftRadius = typedArray.getDimensionPixelSize(
-                R.styleable.ShapeLayout_bottomLeftRadius, radius);
+                R.styleable.ShapeLayout_sp_bottomLeftRadius, radius);
         final int bottomRightRadius = typedArray.getDimensionPixelSize(
-                R.styleable.ShapeLayout_bottomRightRadius, radius);
+                R.styleable.ShapeLayout_sp_bottomRightRadius, radius);
         if (topLeftRadius != radius || topRightRadius != radius ||
                 bottomLeftRadius != radius || bottomRightRadius != radius) {
             gradientDrawable.setCornerRadii(new float[]{
@@ -305,14 +315,14 @@ public class ShapeHelper {
      */
     private static void updateGradientDrawablePadding(TypedArray typedArray, GradientDrawable gradientDrawable) {
 
-        int padding = typedArray.getDimensionPixelOffset(R.styleable.ShapeLayout_padding, 0);
+        int padding = typedArray.getDimensionPixelOffset(R.styleable.ShapeLayout_sp_padding, 0);
         if (padding > 0) {
             gradientDrawable.setPadding(padding, padding, padding, padding);
         } else {
-            gradientDrawable.setPadding(typedArray.getDimensionPixelOffset(R.styleable.ShapeLayout_paddingLeft, 0),
-                    typedArray.getDimensionPixelOffset(R.styleable.ShapeLayout_paddingTop, 0),
-                    typedArray.getDimensionPixelOffset(R.styleable.ShapeLayout_paddingRight, 0),
-                    typedArray.getDimensionPixelOffset(R.styleable.ShapeLayout_paddingBottom, 0));
+            gradientDrawable.setPadding(typedArray.getDimensionPixelOffset(R.styleable.ShapeLayout_sp_paddingLeft, 0),
+                    typedArray.getDimensionPixelOffset(R.styleable.ShapeLayout_sp_paddingTop, 0),
+                    typedArray.getDimensionPixelOffset(R.styleable.ShapeLayout_sp_paddingRight, 0),
+                    typedArray.getDimensionPixelOffset(R.styleable.ShapeLayout_sp_paddingBottom, 0));
         }
 
     }
