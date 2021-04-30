@@ -68,18 +68,20 @@
         android:textSize="15sp"
         android:visibility="visible" />
 
-    <LinearLayout
+    <common.widget.shape.ShapeLinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_margin="20dp"
-        android:background="@drawable/shape_test">
+        app:gradientStartColor="#ffff"
+        app:gradientEndColor="#E60909"
+        app:radius="25dp"
+        android:layout_margin="20dp">
 
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@mipmap/ic_launcher" />
 
-    </LinearLayout>
+    </common.widget.shape.ShapeLinearLayout>
 
     <common.widget.shape.ShapeLinearLayout
         android:layout_width="match_parent"
