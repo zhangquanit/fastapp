@@ -27,6 +27,11 @@ public class ShapeLinearLayout extends LinearLayout {
     }
 
     private void init(Context context, AttributeSet attrs) {
+        int paddingLeft = getPaddingLeft();
+        int paddingTop = getPaddingTop();
+        int paddingRight = getPaddingRight();
+        int paddingBottom = getPaddingBottom();
         setBackground(ShapeHelper.parseAttr(context, attrs));
+        setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
     }
 }

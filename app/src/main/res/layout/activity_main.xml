@@ -52,4 +52,22 @@
     </androidx.cardview.widget.CardView>
 
 
+    <common.widget.shape.ShapeLinearLayout
+        android:id="@+id/shapelayout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        app:sp_radius="15dp"
+        app:sp_shape="rectangle"
+        android:padding="20dp"
+        android:background="#F60E0E"
+        app:sp_solid="#F60E0E">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="ceshifffffffffffffffffffffffffff"
+            android:background="#228F31" />
+
+    </common.widget.shape.ShapeLinearLayout>
 </LinearLayout>

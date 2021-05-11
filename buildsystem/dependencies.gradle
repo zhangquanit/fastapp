@@ -34,7 +34,7 @@ ext {
     kotlin_coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1"
     //Android Support
     supportV4 = "androidx.legacy:legacy-support-v4:${supportVersion}"
-    appCompat = "androidx.appcompat:appcompat:1.2.0"
+    appCompat = "androidx.appcompat:appcompat:1.3.0-alpha02"
     materialDesign = "com.google.android.material:material:${supportVersion}"
     recyclerView = "androidx.recyclerview:recyclerview:${supportVersion}"
     percentlayout = "androidx.percentlayout:percentlayout:${supportVersion}"

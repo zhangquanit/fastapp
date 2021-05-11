@@ -31,12 +31,12 @@
     <style name="fullScreen" parent="AppTheme">
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowBackground">@color/white</item>
-        <item name="windowNoTitle">true</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 
     <style name="AnimBottom">
-        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
-        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+        <item name="android:windowEnterAnimation">@anim/anim_push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/anim_push_bottom_out</item>
     </style>
 
     <style name="update_dialog_style" parent="@android:style/Theme">

@@ -23,7 +23,7 @@ class MyTask(context: Context, param: WorkerParameters) : BackgroundTask(context
             val inputStream = urlConnection.getInputStream()
             val inputStreamReader = InputStreamReader(inputStream)
             val readLines = inputStreamReader.readLines()
-            println("data=$readLines")
+//            println("data=$readLines")
             inputStream.close()
 
         } catch (e: Exception) {
