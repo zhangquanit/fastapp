@@ -312,6 +312,8 @@ public class ShapeHelper {
      * android:left=""
      * android:right=""
      * android:top="" />
+     *
+     * 注意会覆盖View的android:padding属性
      */
     private static void updateGradientDrawablePadding(TypedArray typedArray, GradientDrawable gradientDrawable) {
 
@@ -319,10 +321,16 @@ public class ShapeHelper {
         if (padding > 0) {
             gradientDrawable.setPadding(padding, padding, padding, padding);
         } else {
-            gradientDrawable.setPadding(typedArray.getDimensionPixelOffset(R.styleable.ShapeLayout_sp_paddingLeft, 0),
-                    typedArray.getDimensionPixelOffset(R.styleable.ShapeLayout_sp_paddingTop, 0),
-                    typedArray.getDimensionPixelOffset(R.styleable.ShapeLayout_sp_paddingRight, 0),
-                    typedArray.getDimensionPixelOffset(R.styleable.ShapeLayout_sp_paddingBottom, 0));
+            int paddingLeft = typedArray.getDimensionPixelOffset(R.styleable.ShapeLayout_sp_paddingLeft, 0);
+            int paddingTop = typedArray.getDimensionPixelOffset(R.styleable.ShapeLayout_sp_paddingTop, 0);
+            int paddingRight = typedArray.getDimensionPixelOffset(R.styleable.ShapeLayout_sp_paddingRight, 0);
+            int paddingBottom = typedArray.getDimensionPixelOffset(R.styleable.ShapeLayout_sp_paddingBottom, 0);
+            if (paddingLeft > 0 || paddingTop > 0 || paddingRight > 0 || paddingBottom > 0) {
+                gradientDrawable.setPadding(paddingLeft,
+                        paddingTop,
+                        paddingRight,
+                        paddingBottom);
+            }
         }
 
     }

@@ -3,12 +3,26 @@ package com.fastapp;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PixelFormat;
+import android.graphics.Rect;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewParent;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -26,11 +40,15 @@ import com.android.base.util.share.ShareInfo;
 import com.android.base.widget.AlertDialogView;
 import com.android.util.ext.ToastUtil;
 import com.blankj.utilcode.util.ClickUtils;
+import com.blankj.utilcode.util.SizeUtils;
+import com.blankj.utilcode.util.ToastUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.lang.reflect.Field;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -66,17 +84,6 @@ public class MainActivity extends BaseActivity {
 
         dirTest();
         doTask();
-
-        View view = findViewById(R.id.shapelayout);
-        int paddingLeft = view.getPaddingLeft();
-        int paddingTop = view.getPaddingTop();
-        int paddingRight = view.getPaddingRight();
-        int paddingBottom = view.getPaddingBottom();
-        int paddingStart = view.getPaddingStart();
-        int paddingEnd = view.getPaddingEnd();
-        System.out.println("paddingLeft=" + paddingLeft + ",paddingTop=" + paddingTop + ",paddingRight=" + paddingRight + ",paddingBottom=" + paddingBottom);
-        System.out.println("paddingStart="+paddingStart+",paddingEnd="+paddingEnd);
-
     }
 
 
@@ -101,9 +108,6 @@ public class MainActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.testFrag:
-//                TestFrag.start(mContext);
-//                Intent intent = new Intent(this, ActivityTwo.class);
-//                startAct(intent);
                 break;
             case R.id.showDialog:
                 showDialog();
@@ -233,9 +237,4 @@ public class MainActivity extends BaseActivity {
         BackgroundTask.execute(MyTask.class);
     }
 
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
 }

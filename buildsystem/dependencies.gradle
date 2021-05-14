@@ -40,8 +40,8 @@ ext {
     percentlayout = "androidx.percentlayout:percentlayout:${supportVersion}"
     cardView = "androidx.cardview:cardview:1.0.0"
 
-    constraint = "androidx.constraintlayout:constraintlayout:2.0.2"
-    lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:2.0.0" //ViewModelProviders
+    constraint = "androidx.constraintlayout:constraintlayout:2.0.4"
+    lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:2.2.0" //ViewModelProviders
     multidex = 'androidx.multidex:multidex:2.0.1'
 
     //Rx系列
