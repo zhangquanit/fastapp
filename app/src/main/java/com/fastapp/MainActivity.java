@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewParent;
 import android.view.WindowManager;
@@ -84,6 +86,10 @@ public class MainActivity extends BaseActivity {
 
         dirTest();
         doTask();
+
+        LinearLayout view = findViewById(R.id.testbar);
+        Drawable background = view.getBackground();
+        System.out.println("MainActivity background=" + background + ",view=" + view);
     }
 
 
@@ -108,6 +114,8 @@ public class MainActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.testFrag:
+                LayoutInflater inflater = LayoutInflater.from(this);
+                View view = inflater.inflate(R.layout.activity_main, null);
                 break;
             case R.id.showDialog:
                 showDialog();

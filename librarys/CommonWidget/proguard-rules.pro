@@ -15,3 +15,8 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-dontwarn common.widget.shape.**
+-keep public class common.widget.shape.** {*;}
+-keep public class android.support.v4.view.** {*;}
+-keep public class android.view.LayoutInflater.** {*;}

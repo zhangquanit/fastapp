@@ -1,4 +1,11 @@
-<manifest package="common.widget">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="common.widget">
 
-
+    <application>
+        <provider
+            android:name="common.widget.shape.ShapeContentProvider"
+            android:authorities="${applicationId}.shape.provider"
+            android:exported="false"
+            android:multiprocess="true" />
+    </application>
 </manifest>

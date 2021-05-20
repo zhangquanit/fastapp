@@ -1,10 +1,12 @@
-package common.widget.shape;
+package common.widget.shape.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
+
+import common.widget.shape.ShapeAttrParser;
 
 /**
  * 支持shape背景的LinearLayout
@@ -27,11 +29,6 @@ public class ShapeLinearLayout extends LinearLayout {
     }
 
     private void init(Context context, AttributeSet attrs) {
-//        int paddingLeft = getPaddingLeft();
-//        int paddingTop = getPaddingTop();
-//        int paddingRight = getPaddingRight();
-//        int paddingBottom = getPaddingBottom();
-        setBackground(ShapeHelper.parseAttr(context, attrs));
-//        setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
+        ShapeAttrParser.parseAttr(context, attrs,this);
     }
 }

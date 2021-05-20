@@ -1,10 +1,13 @@
-package common.widget.shape;
+package common.widget.shape.view;
 
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import common.widget.shape.ShapeAttrParser;
 
 /**
  * 支持shape背景的ConstraintLayout
@@ -27,11 +30,6 @@ public class ShapeConstraintLayout extends ConstraintLayout {
     }
 
     private void init(Context context, AttributeSet attrs) {
-        int paddingLeft = getPaddingLeft();
-        int paddingTop = getPaddingTop();
-        int paddingRight = getPaddingRight();
-        int paddingBottom = getPaddingBottom();
-        setBackground(ShapeHelper.parseAttr(context, attrs));
-        setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
+        ShapeAttrParser.parseAttr(context, attrs,this);
     }
 }

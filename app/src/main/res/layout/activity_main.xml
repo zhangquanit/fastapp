@@ -52,7 +52,7 @@
     </androidx.cardview.widget.CardView>
 
 
-    <common.widget.shape.ShapeLinearLayout
+    <common.widget.shape.view.ShapeLinearLayout
         android:id="@+id/shapelayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,9 +69,9 @@
             android:text="ceshifffffffffffffffffffffffffff"
             android:background="#228F31" />
 
-    </common.widget.shape.ShapeLinearLayout>
+    </common.widget.shape.view.ShapeLinearLayout>
 
-    <common.widget.shape.ShapeLinearLayout
+    <common.widget.shape.view.ShapeLinearLayout
         android:id="@+id/testbar2"
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -79,30 +79,31 @@
         android:layout_margin="20dp"
         android:orientation="vertical"
         app:sp_radius="25dp"
-        app:sp_solid="#850B0B"
+        app:sp_solid="#0B8538"
         >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="发的发发发"
             />
-    </common.widget.shape.ShapeLinearLayout>
-
+    </common.widget.shape.view.ShapeLinearLayout>
 
     <LinearLayout
         android:id="@+id/testbar"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:padding="20dp"
-        android:paddingLeft="30dp"
-        android:paddingStart="10dp"
         android:layout_margin="20dp"
-        android:orientation="vertical"
-        >
+        app:sp_radius="25dp"
+        app:sp_strokeWidth="1dp"
+        app:sp_strokeColor="#0B8538"
+
+        android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="发的发发发"
+            android:text="自定义属性解析"
             />
     </LinearLayout>
+
 </LinearLayout>
