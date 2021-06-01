@@ -1,14 +1,17 @@
 package com.fastapp;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.ShapeDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
@@ -26,6 +29,9 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContract;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.PermissionChecker;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -71,6 +77,12 @@ public class MainActivity extends BaseActivity {
         ctx.startActivity(new Intent(ctx, MainActivity.class));
     }
 
+    @androidx.annotation.NonNull
+    @NotNull
+    @Override
+    public AppCompatDelegate getDelegate() {
+        return super.getDelegate();
+    }
 
     @Override
     public int getLayoutId() {
@@ -114,8 +126,36 @@ public class MainActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.testFrag:
-                LayoutInflater inflater = LayoutInflater.from(this);
-                View view = inflater.inflate(R.layout.activity_main, null);
+                String[] permissions = new String[]{
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                };
+                boolean isGranted = true;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    if (Environment.isExternalStorageManager()) {
+                        isGranted = true;
+                    } else {
+                        isGranted = false;
+                    }
+                } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    for (String permission : permissions) {
+                        int ps = ContextCompat.checkSelfPermission(mContext, permission);
+                        if (ps != PackageManager.PERMISSION_GRANTED) {
+                            isGranted = false;
+                            break;
+                        }
+                    }
+                } else {
+                    for (String permission : permissions) {
+                        int ps = PermissionChecker.checkSelfPermission(mContext, permission);
+                        if (ps != PackageManager.PERMISSION_GRANTED) {
+                            isGranted = false;
+                            break;
+                        }
+                    }
+                }
+
+                System.out.println("isGranted=" + isGranted);
                 break;
             case R.id.showDialog:
                 showDialog();

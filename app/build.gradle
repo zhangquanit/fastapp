@@ -199,6 +199,7 @@ dependencies {
     implementation config.cardView
     implementation config.multidex
     implementation config.constraint //约束布局
+    implementation config.materialDesign //material
     implementation config.lifecycleExtensions //ViewModelProviders
     implementation config.fragmentation  //页面容器
     implementation config.rxPermissions  //rxpermission
