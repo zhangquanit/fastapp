@@ -45,24 +45,8 @@ import me.yokeyword.fragmentation.Fragmentation;
  * @author 张全
  */
 public class App extends Application {
-    static {
-        //设置全局的Header构建器
-        SmartRefreshLayout.setDefaultRefreshHeaderCreator((context, layout) -> {
-            //            layout.setPrimaryColorsId(R.color.home_bgcolor, R.color.c_131413);//全局设置主题颜色
-            ClassicsHeader classicsHeader = new ClassicsHeader(context);
-            classicsHeader.setBackgroundColor(Color.TRANSPARENT);
-            return classicsHeader;//.setTimeFormat(new DynamicTimeFormat("更新于 %s"));//指定为经典Header，默认是 贝塞尔雷达Header
-            //          return new MaterialHeader(context).setColorSchemeResources(android.R.color.holo_blue_bright,
-            //                    android.R.color.holo_green_light,
-            //                    android.R.color.holo_orange_light,
-            //                    android.R.color.holo_red_light);
-        });
-    }
-
-    public static String UMENG_CHANNEL; //友盟渠道
     public static boolean devEnv = false; //开发环境
     public static boolean coldStart; //冷启动
-
     public static Thread.UncaughtExceptionHandler mainExceptionHandler;
 
     @Override
@@ -113,6 +97,7 @@ public class App extends Application {
         int versionCode = 0;
         String versionName = null;
         String appName = null;
+        String channel = null;
         try {
             ApplicationInfo info = pm.getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
             PackageInfo packInfo = pm.getPackageInfo(getPackageName(), 0);
@@ -122,7 +107,7 @@ public class App extends Application {
                 versionCode = packInfo.versionCode;
             }
             if (null != info.metaData) {
-                UMENG_CHANNEL = info.metaData.getString("UMENG_CHANNEL");
+                channel = info.metaData.getString("UMENG_CHANNEL");
                 devEnv = info.metaData.getBoolean("env", false);
             }
         } catch (Exception e) {
@@ -135,7 +120,7 @@ public class App extends Application {
         LContext.pkgName = getPackageName();
         LContext.versionCode = versionCode;
         LContext.versionName = versionName;
-        LContext.channel = UMENG_CHANNEL;
+        LContext.channel = channel;
 
         DataConfig.DEBUG = BuildConfig.DEBUG;
 //        if (devEnv) {
@@ -222,6 +207,12 @@ public class App extends Application {
                 .stackViewMode(Fragmentation.BUBBLE)
                 .debug(BuildConfig.DEBUG)
                 .install();
+
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator((context, layout) -> {
+            ClassicsHeader classicsHeader = new ClassicsHeader(context);
+            classicsHeader.setBackgroundColor(Color.TRANSPARENT);
+            return classicsHeader;
+        });
     }
 
     private void handleExceptions() {

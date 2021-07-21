@@ -151,9 +151,9 @@
             android:screenOrientation="portrait"
             android:theme="@style/MainTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
+
         <activity
-            android:name=".ActivityTwo"
-            android:process=":sub" />
+            android:name=".ActivityTwo" />
 
         <activity
             android:name=".LoginActivity"
