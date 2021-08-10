@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 def config = rootProject.ext
 android {
@@ -175,16 +176,19 @@ android {
     }
 
     useLibrary 'org.apache.http.legacy'
-
-    repositories {
-        flatDir {
-            dirs 'libs'
-        }
+}
+repositories {
+    flatDir {
+        dirs 'libs'
     }
 }
-
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
 dependencies {
-    implementation fileTree(include: ['*.jar', '*.aar'], exclude: ['android-support*.jar'], dir: 'libs')
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
     api project(':librarys:AppUpdate')
     api project(':librarys:CommonUtil')
     api project(':librarys:Logger')

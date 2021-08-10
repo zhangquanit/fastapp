@@ -21,7 +21,7 @@ public class CommonLiveData<T> extends MutableLiveData<T> {
     }
 
     @Override
-    public void observe(@NonNull LifecycleOwner owner, @NonNull Observer<? super T> observer) {
+    public void observe(@NonNull LifecycleOwner owner, final @NonNull Observer<? super T> observer) {
         super.observe(owner, new Observer<T>() {
             @Override
             public void onChanged(T data) {
