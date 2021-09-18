@@ -13,9 +13,10 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.android.base.ui.BaseActivity;
-import com.android.base.util.KVUtil;
 import com.fastapp.MainActivity;
 import com.fastapp.R;
+
+import net.medlinker.android.splash.SplashUtil;
 
 import java.util.ArrayList;
 
@@ -23,7 +24,6 @@ import java.util.ArrayList;
  * 引导页
  */
 public class GuideActivity extends BaseActivity {
-    private static String SHOW_GUIDE = "SHOW_GUIDE";//引导页
     private static final int[] imgs = new int[]{R.drawable.guide01, R.drawable.guide02, R.drawable.guide03};
     private ViewPager viewPager;
 
@@ -31,14 +31,6 @@ public class GuideActivity extends BaseActivity {
     public static void start(Context ctx) {
         Intent intent = new Intent(ctx, GuideActivity.class);
         ctx.startActivity(intent);
-    }
-
-    public static void showGuide() {
-        KVUtil.set(SHOW_GUIDE, true);
-    }
-
-    public static boolean hasShowGuide() {
-        return KVUtil.getBoolean(SHOW_GUIDE, false);
     }
 
     @Override
@@ -60,7 +52,7 @@ public class GuideActivity extends BaseActivity {
                 btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showGuide();
+                        SplashUtil.setShowGuide(true);
                         MainActivity.start(GuideActivity.this);
                         finish();
                     }

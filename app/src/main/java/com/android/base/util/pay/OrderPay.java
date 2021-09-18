@@ -11,9 +11,9 @@ import android.os.Message;
 import android.text.TextUtils;
 
 import com.alipay.sdk.app.PayTask;
+import com.android.base.event.EventMsg;
 import com.android.util.ext.ToastUtil;
 import com.android.base.Constant;
-import com.android.base.event.PushEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -71,12 +71,12 @@ public class OrderPay {
                     String resultStatus = payResult.getResultStatus();
                     // 判断resultStatus 为9000则代表支付成功
                     if (TextUtils.equals(resultStatus, "9000")) {
-                        EventBus.getDefault().post(new PushEvent(Constant.Event.ORDER_BUY_SUCCESS, PayWay.ZHIBAO));
+                        EventBus.getDefault().post(new EventMsg(Constant.Event.ORDER_BUY_SUCCESS, PayWay.ZHIBAO));
                     } else if (TextUtils.equals(resultStatus, "6001")) {
 //                        ToastUtil.show("取消支付");
-                        EventBus.getDefault().post(new PushEvent(Constant.Event.ORDER_BUY_CANCEL, PayWay.ZHIBAO));
+                        EventBus.getDefault().post(new EventMsg(Constant.Event.ORDER_BUY_CANCEL, PayWay.ZHIBAO));
                     } else {
-                        EventBus.getDefault().post(new PushEvent(Constant.Event.ORDER_BUY_FAIL, PayWay.ZHIBAO));
+                        EventBus.getDefault().post(new EventMsg(Constant.Event.ORDER_BUY_FAIL, PayWay.ZHIBAO));
                     }
                     break;
                 }

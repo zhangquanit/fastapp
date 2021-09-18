@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.base.Constant;
-import com.android.base.event.PushEvent;
+import com.android.base.event.EventMsg;
 import com.android.base.ui.SimpleFrag;
 import com.android.base.ui.SimpleFragAct;
 import com.android.base.widget.StatusBar;
@@ -38,7 +38,7 @@ public class TestFrag extends SimpleFrag {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EventBus.getDefault().post(new PushEvent(Constant.Event.LOGIN_SUCCESS,"登录成功"));
+                EventBus.getDefault().post(new EventMsg(Constant.Event.LOGIN_SUCCESS,"登录成功"));
             }
         });
 

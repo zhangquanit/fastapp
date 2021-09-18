@@ -220,8 +220,8 @@ public final class RestClient {
 //            int code = new JSONObject(responseStr).optInt("code");
 //            if (code == 201) {
 //                UserClient.loginOut();
-//                EventBus.getDefault().post(new PushEvent(Constant.Event.LOGIN_OUT));
-//                EventBus.getDefault().post(new PushEvent(Constant.Event.LOGIN_SESSION_INVALIDATE));
+//                EventBus.getDefault().post(new EventMsg(Constant.Event.LOGIN_OUT));
+//                EventBus.getDefault().post(new EventMsg(Constant.Event.LOGIN_SESSION_INVALIDATE));
 //            }
 
         } catch (Exception e) {

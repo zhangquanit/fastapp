@@ -7,7 +7,7 @@ import com.android.util.LContext
 import com.android.util.ext.ToastUtil
 import com.android.util.log.LogUtil
 import com.android.base.Constant
-import com.android.base.event.PushEvent
+import com.android.base.event.EventMsg
 import com.android.base.util.pay.PayWay
 import com.fastapp.R
 import com.tencent.mm.opensdk.constants.ConstantsAPI
@@ -52,20 +52,35 @@ class WXPayEntryActivity : Activity(), IWXAPIEventHandler {
         if (resp.type == ConstantsAPI.COMMAND_PAY_BY_WX) {
             when (resp.errCode) {
                 0 -> {
-                    EventBus.getDefault().post(PushEvent(Constant.Event.ORDER_BUY_SUCCESS, PayWay.WX))
+                    EventBus.getDefault().post(
+                        EventMsg(
+                            Constant.Event.ORDER_BUY_SUCCESS,
+                            PayWay.WX
+                        )
+                    )
                     finish()
                 }
                 -1 -> {
                     /*
                      * 可能的原因：签名错误、未注册APPID、项目设置APPID不正确、注册的APPID与设置的不匹配、其他异常等。
-                     */EventBus.getDefault().post(PushEvent(Constant.Event.ORDER_BUY_FAIL, PayWay.WX))
+                     */EventBus.getDefault().post(
+                        EventMsg(
+                            Constant.Event.ORDER_BUY_FAIL,
+                            PayWay.WX
+                        )
+                    )
                     ToastUtil.show("支付失败")
                     finish()
                 }
                 -2 -> {
                     /*
                      * 无需处理。发生场景：用户不支付了，点击取消，返回APP。
-                     */EventBus.getDefault().post(PushEvent(Constant.Event.ORDER_BUY_CANCEL, PayWay.WX))
+                     */EventBus.getDefault().post(
+                        EventMsg(
+                            Constant.Event.ORDER_BUY_CANCEL,
+                            PayWay.WX
+                        )
+                    )
                     ToastUtil.show("取消支付")
                     finish()
                 }

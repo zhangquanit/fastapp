@@ -122,7 +122,7 @@
 
         <!-- app  start-->
         <activity
-            android:name="com.android.base.ui.splash.SplashAct"
+            android:name="com.android.base.ui.splash.SplashActivity"
             android:alwaysRetainTaskState="true"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">

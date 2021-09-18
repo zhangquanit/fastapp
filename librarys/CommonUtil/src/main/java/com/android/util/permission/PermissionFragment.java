@@ -26,6 +26,7 @@ public class PermissionFragment extends Fragment {
      * 权限监听接口
      */
     private PermissionListener listener;
+
     public void setListener(PermissionListener listener) {
         this.listener = listener;
     }
@@ -38,6 +39,7 @@ public class PermissionFragment extends Fragment {
 
     /**
      * 申请权限
+     *
      * @param permissions 需要申请的权限
      */
     @TargetApi(Build.VERSION_CODES.M)
@@ -60,8 +62,9 @@ public class PermissionFragment extends Fragment {
 
     /**
      * fragment回调处理权限的结果
-     * @param requestCode 请求码 要等于申请时候的请求码
-     * @param permissions 申请的权限
+     *
+     * @param requestCode  请求码 要等于申请时候的请求码
+     * @param permissions  申请的权限
      * @param grantResults 对应权限的处理结果
      */
     @Override
@@ -83,24 +86,20 @@ public class PermissionFragment extends Fragment {
                 //已经全部授权
                 permissionAllGranted();
             } else {
-
-                //勾选了对话框中”Don’t ask again”的选项, 返回false
+                List<Permission> permissionList = new ArrayList<>();
                 for (String deniedPermission : deniedPermissionList) {
+                    Permission permission = new Permission();
+                    permission.mPermission = deniedPermission;
+                    permission.mIsGrand = false;
                     boolean flag = shouldShowRequestPermissionRationale(deniedPermission);
-                    if (!flag) {
-                        //拒绝授权
-                        permissionShouldShowRationale(deniedPermissionList);
-                        return;
+                    if (!flag) { //拒绝授权 勾选了对话框中”Don’t ask again”的选项, 返回false
+                        permission.mShouldShowRational = true;
                     }
+                    permissionList.add(permission);
                 }
-                //拒绝授权
-                permissionHasDenied(deniedPermissionList);
-
+                permissionHasDenied(permissionList);
             }
-
-
         }
-
     }
 
 
@@ -118,20 +117,9 @@ public class PermissionFragment extends Fragment {
      *
      * @param deniedList 被拒绝的权限
      */
-    private void permissionHasDenied(List<String> deniedList) {
+    private void permissionHasDenied(List<Permission> deniedList) {
         if (listener != null) {
             listener.onDenied(deniedList);
-        }
-    }
-
-    /**
-     * 权限被拒绝并且勾选了不在询问
-     *
-     * @param deniedList 勾选了不在询问的权限
-     */
-    private void permissionShouldShowRationale(List<String> deniedList) {
-        if (listener != null) {
-            listener.onShouldShowRationale(deniedList);
         }
     }
 

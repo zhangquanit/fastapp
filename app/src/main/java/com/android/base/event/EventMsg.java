@@ -8,15 +8,15 @@ package com.android.base.event;
  *
  * @authos 张全
  */
-public class PushEvent {
+public class EventMsg {
     private String action;
     private Object data;
 
-    public PushEvent(String action) {
+    public EventMsg(String action) {
         this.action = action;
     }
 
-    public PushEvent(String action, Object data) {
+    public EventMsg(String action, Object data) {
         this.action = action;
         this.data = data;
     }

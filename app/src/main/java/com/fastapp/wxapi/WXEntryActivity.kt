@@ -4,7 +4,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import com.android.base.Constant
-import com.android.base.event.PushEvent
+import com.android.base.event.EventMsg
 import com.fastapp.BuildConfig
 import com.tencent.mm.opensdk.modelbase.BaseResp
 import com.tencent.mm.opensdk.modelmsg.SendAuth
@@ -20,16 +20,36 @@ class WXEntryActivity : WXCallbackActivity() {
             when (authResp.errCode) {
                 BaseResp.ErrCode.ERR_OK -> { // 用户同意
                     addToClip(authResp.code)
-                    EventBus.getDefault().post(PushEvent(Constant.Event.WX_CODE, authResp.code))
+                    EventBus.getDefault().post(
+                        EventMsg(
+                            Constant.Event.WX_CODE,
+                            authResp.code
+                        )
+                    )
                 }
                 BaseResp.ErrCode.ERR_AUTH_DENIED -> { // 用户拒绝授权
-                    EventBus.getDefault().post(PushEvent(Constant.Event.WX_CODE, "0"))
+                    EventBus.getDefault().post(
+                        EventMsg(
+                            Constant.Event.WX_CODE,
+                            "0"
+                        )
+                    )
                 }
                 BaseResp.ErrCode.ERR_USER_CANCEL -> { // 取消授权
-                    EventBus.getDefault().post(PushEvent(Constant.Event.WX_CODE, "1"))
+                    EventBus.getDefault().post(
+                        EventMsg(
+                            Constant.Event.WX_CODE,
+                            "1"
+                        )
+                    )
                 }
                 else -> {
-                    EventBus.getDefault().post(PushEvent(Constant.Event.WX_CODE, "1"))
+                    EventBus.getDefault().post(
+                        EventMsg(
+                            Constant.Event.WX_CODE,
+                            "1"
+                        )
+                    )
                 }
             }
             finish()

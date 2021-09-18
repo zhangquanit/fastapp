@@ -31,7 +31,7 @@ import com.android.util.LContext;
 import com.android.util.ext.ToastUtil;
 import com.android.util.log.LogUtil;
 import com.android.base.Constant;
-import com.android.base.event.PushEvent;
+import com.android.base.event.EventMsg;
 import com.android.base.util.CommonUtil;
 import com.android.base.util.DispatchUtil;
 import com.android.base.util.NotificationPageHelper;
@@ -772,8 +772,8 @@ public class WebViewFrag extends SimpleFrag {
 
     //------------------------------url handle
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(PushEvent pushEvent) {
-        if (TextUtils.equals(pushEvent.getAction(), Constant.Event.LOGIN_SUCCESS)) {
+    public void onEvent(EventMsg eventMsg) {
+        if (TextUtils.equals(eventMsg.getAction(), Constant.Event.LOGIN_SUCCESS)) {
             loginCallback();
         }
     }

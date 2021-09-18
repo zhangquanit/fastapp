@@ -10,15 +10,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.android.base.util.ext.onClick
+import com.android.util.common.CommonCallBack
 import com.fastapp.R
 import kotlinx.android.synthetic.main.privacy_dialog.*
+import net.medlinker.android.splash.SplashUtil
 
 
 /**
  * 隐私政策弹窗
  */
 class PrivacyDialog : DialogFragment() {
-    var callBack: CallBack? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NO_FRAME, R.style.update_dialog_style)
@@ -45,13 +46,14 @@ class PrivacyDialog : DialogFragment() {
         }
 
         tv_know.onClick {
-            callBack?.dismiss()
+            SplashUtil.setPrivacyGranted(true)
+            mCallBack?.onCallBack(true)
         }
     }
 
-
+    private var mCallBack: CommonCallBack<Boolean>? = null
+    fun callback(callBack: CommonCallBack<Boolean>) {
+        mCallBack = callBack
+    }
 }
 
-interface CallBack {
-    fun dismiss()
-}

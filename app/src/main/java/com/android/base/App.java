@@ -30,21 +30,22 @@ import com.yanzhenjie.album.AlbumConfig;
 import com.yanzhenjie.album.AlbumFile;
 import com.yanzhenjie.album.AlbumLoader;
 
+import net.medlinker.android.splash.SplashUtil;
+
 import java.util.List;
 import java.util.Locale;
 
-import butterknife.ButterKnife;
 import component.update.AppDownloadClient;
 import component.update.AppVersionConfiguration;
 import io.reactivex.exceptions.CompositeException;
 import io.reactivex.functions.Consumer;
 import io.reactivex.plugins.RxJavaPlugins;
-import me.yokeyword.fragmentation.Fragmentation;
 
 /**
  * @author 张全
  */
 public class App extends Application {
+    private static App mApp;
     public static boolean devEnv = false; //开发环境
     public static boolean coldStart; //冷启动
     public static Thread.UncaughtExceptionHandler mainExceptionHandler;
@@ -52,11 +53,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        MMKV.initialize(this, MMKVLogLevel.LevelDebug); //微信MMKV
-        if (!ProcessUtils.isMainProcess()) {
-            return;
-        }
-        init();//只有主进程才进行相关配置初始化
+        init();
     }
 
     @Override
@@ -67,11 +64,15 @@ public class App extends Application {
 
     private void init() {
         coldStart = true;
+        mApp = this;
+        MMKV.initialize(this, MMKVLogLevel.LevelDebug); //微信MMKV
+        initAppInfo();
+
+        if (!ProcessUtils.isMainProcess()) {
+            return;
+        }
         mainExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
-        // 初始化配置
-        initConfigs();
-        // 初始化统计
-        initAnalytics();
+
         // 开启服务、任务
         initBackgroundTasks();
         //相册选择
@@ -83,16 +84,23 @@ public class App extends Application {
                 .setVersionChecker(new AppVersionChecker())
                 .build();
         AppDownloadClient.getInstance().init(configuration);
+
+        //是否同意隐私政策
+        boolean privacyGranted = SplashUtil.isPrivacyGranted();
+        if (privacyGranted) {
+            initAfterPrivacy();
+        }
+        initAsync();
         //其他初始化
         initOthers();
         //拦截异常
-        handleExceptions();
+        handleRxJavaException();
     }
 
     /**
      * 初始化配置
      */
-    private void initConfigs() {
+    private void initAppInfo() {
         PackageManager pm = getPackageManager();
         int versionCode = 0;
         String versionName = null;
@@ -123,34 +131,17 @@ public class App extends Application {
         LContext.channel = channel;
 
         DataConfig.DEBUG = BuildConfig.DEBUG;
-//        if (devEnv) {
-//            int dev = getDev();
-//            if (dev == 0) { //线上
-//                DataConfig.API_HOST = "";
-//                DataConfig.H5_HOST = "";
-//                DataConfig.LOG_HOST = "";
-//            } else if (dev == 1) { //测试
-//                DataConfig.API_HOST = "";
-//                DataConfig.H5_HOST = "";
-//                DataConfig.LOG_HOST = "";
-//            } else if (dev == 2) { //开发
-//                DataConfig.API_HOST = "";
-//                DataConfig.H5_HOST = "";
-//                DataConfig.LOG_HOST = "";
-//            } else if (dev == 3) { //预发
-//                DataConfig.API_HOST = "";
-//                DataConfig.H5_HOST = "";
-//                DataConfig.LOG_HOST = "";
-//            }
-//        } else {
-//            DataConfig.API_HOST = BuildConfig.API_HOST;
-//            DataConfig.H5_HOST = BuildConfig.H5_HOST;
-//            DataConfig.LOG_HOST = BuildConfig.LOG_HOST;
-//        }
 
         DataConfig.API_HOST = BuildConfig.API_HOST;
         DataConfig.H5_HOST = BuildConfig.H5_HOST;
         DataConfig.LOG_HOST = BuildConfig.LOG_HOST;
+    }
+
+    private void initAsync() {
+        new Thread(() -> {
+            initAlbum();
+
+        }).start();
     }
 
     /**
@@ -173,14 +164,6 @@ public class App extends Application {
 
     }
 
-
-    /**
-     * 初始化友盟统计
-     */
-    private void initAnalytics() {
-        Umeng.initAnalytics(this, BuildConfig.DEBUG);
-    }
-
     /**
      * 初始化后台定时任务
      */
@@ -199,15 +182,6 @@ public class App extends Application {
      * 其他初始化
      */
     private void initOthers() {
-        //ButterKnife
-        ButterKnife.setDebug(BuildConfig.DEBUG);
-        //Fragmentation
-        Fragmentation.builder()
-                // 显示悬浮球 ; 其他Mode:SHAKE: 摇一摇唤出   NONE：隐藏
-                .stackViewMode(Fragmentation.BUBBLE)
-                .debug(BuildConfig.DEBUG)
-                .install();
-
         SmartRefreshLayout.setDefaultRefreshHeaderCreator((context, layout) -> {
             ClassicsHeader classicsHeader = new ClassicsHeader(context);
             classicsHeader.setBackgroundColor(Color.TRANSPARENT);
@@ -215,7 +189,7 @@ public class App extends Application {
         });
     }
 
-    private void handleExceptions() {
+    private void handleRxJavaException() {
         //处理RxJava  没有设置onError回调  io.reactivex.exceptions.OnErrorNotImplementedException
         RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
             @Override
@@ -244,6 +218,11 @@ public class App extends Application {
                 throwable.printStackTrace();
             }
         });
+    }
+
+    public static void initAfterPrivacy() {
+        // 初始化统计
+        Umeng.initAnalytics(mApp, BuildConfig.DEBUG);
     }
 
 

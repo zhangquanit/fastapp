@@ -5,30 +5,15 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.PixelFormat;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewParent;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.PermissionChecker;
@@ -39,7 +24,7 @@ import com.android.base.Constant;
 import com.android.base.data.HttpResponseException;
 import com.android.base.data.NetReqResult;
 import com.android.base.data.ResponseDataObject;
-import com.android.base.event.PushEvent;
+import com.android.base.event.EventMsg;
 import com.android.base.task.BackgroundTask;
 import com.android.base.ui.BaseActivity;
 import com.android.base.util.GlideUtil;
@@ -48,15 +33,12 @@ import com.android.base.util.share.ShareInfo;
 import com.android.base.widget.AlertDialogView;
 import com.android.util.ext.ToastUtil;
 import com.blankj.utilcode.util.ClickUtils;
-import com.blankj.utilcode.util.SizeUtils;
-import com.blankj.utilcode.util.ToastUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
-import java.lang.reflect.Field;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -106,7 +88,7 @@ public class MainActivity extends BaseActivity {
 
 
     @Subscribe(threadMode = ThreadMode.MAIN_ORDERED)
-    public void onEvent(PushEvent event) {
+    public void onEvent(EventMsg event) {
         if (containsAction(event.getAction())) {
             ToastUtil.show((String) event.getData());
         }
