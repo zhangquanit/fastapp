@@ -26,7 +26,11 @@ class PrivacyDialog : DialogFragment() {
     }
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.privacy_dialog, container)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = inflater.inflate(R.layout.privacy_dialog, container)
 
     @SuppressLint("CheckResult")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,9 +49,14 @@ class PrivacyDialog : DialogFragment() {
             return@setOnKeyListener false
         }
 
+        tv_cancel.onClick {
+            mCallBack?.onCallBack(false)
+            dismiss()
+        }
         tv_know.onClick {
             SplashUtil.setPrivacyGranted(true)
             mCallBack?.onCallBack(true)
+            dismiss()
         }
     }
 

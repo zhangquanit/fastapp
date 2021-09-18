@@ -41,9 +41,13 @@ class SplashActivity : AppCompatActivity() {
      */
     private fun showPrivacyDialog() {
         val dialogFragment = PrivacyDialog()
-        dialogFragment.callback(CommonCallBack {
-            grantPermission()
-            App.initAfterPrivacy()
+        dialogFragment.callback(CommonCallBack { granted ->
+            if (granted) {
+                grantPermission()
+                App.initAfterPrivacy()
+            } else {
+                finish()
+            }
         })
         dialogFragment.show(supportFragmentManager, "PrivacyProtocol")
     }
